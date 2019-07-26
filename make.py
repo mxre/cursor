@@ -31,6 +31,10 @@ optParser.add_option('-c','--clean',action='store_true',dest='clean',help='Delet
 optParser.add_option('-f','--force',action='store_true',dest='force',help='Overwrite existing cursor theme')
 optParser.add_option('-a','--anicur',action='store_true',dest='anicur',help='Use anicursorgen.py to generate a Windows cursor set')
 
+if __name__ == '__main__':
+	# parse command line into arguments and options
+	(options, args) = optParser.parse_args()
+
 # generated cursor sizes
 sizes = [ 24, 32, 48, 64, 96 ]
 
@@ -531,21 +535,33 @@ def generateXCursor(pngs_directory, hotspots_directory):
 				'{}/cursors/{}'.format(output_directory, name)
 			], check = True)
 
-def generateWindowsCursor(pngs_directory, hotspots_directory):
-	for entry in os.scandir(hotspots_directory):
-		if not entry.name.endswith('.in') or not entry.is_file():
-			continue
-		name = os.path.splitext(entry.name)[0]
-		if is_animated_cursor(hotspots_directory, name):
-			suffix = 'ani'
-		else:
-			suffix = 'cur'
-		subprocess.run(
-			[
-				'./anicursorgen.py', '--prefix', pngs_directory,
-				'{}/{}.in'.format(hotspots_directory, name),
-				'{}/{}.{}'.format(output_directory, name, suffix)
-			], check = True)
+if options.anicur:
+	class Args:
+		""" Fake the arguments so that we can include anicursorgen"""
+		def __init__(self, prefix=os.getcwd()):
+			self.prefix = prefix
+		def __getattr__(self, attr):
+			if attr == 'prefix':
+				return self.prefix
+			else:
+				return None
+
+	from anicursorgen import make_cursor_from
+
+	def generateWindowsCursor(pngs_directory, hotspots_directory):
+		for entry in os.scandir(hotspots_directory):
+			args = Args(prefix=pngs_directory)
+			if not entry.name.endswith('.in') or not entry.is_file():
+				continue
+			name = os.path.splitext(entry.name)[0]
+			if is_animated_cursor(hotspots_directory, name):
+				suffix = 'ani'
+			else:
+				suffix = 'cur'
+			input_config = open(entry.path, 'r')
+			output_file = open('{}/{}.{}'.format(output_directory, name, suffix), 'wb')
+			make_cursor_from(input_config, output_file, args)
+			input_config.close()
 
 def is_animated_cursor(hotspots_directory, name):
 	""" Check if configuration file belongs to an animated cursor """
@@ -559,8 +575,6 @@ def is_animated_cursor(hotspots_directory, name):
 			if duration > 0:
 				return True
 		return False
-
-		
 
 def make_animated_cursor_apng(pngs_directory, size, name):
 	p = subprocess.run([
@@ -577,9 +591,6 @@ def make_animated_cursor_apng(pngs_directory, size, name):
 		print(p.stdout)
 
 if __name__ == '__main__':
-	# parse command line into arguments and options
-	(options, args) = optParser.parse_args()
-
 	if len(args) != 1:
 		fatalError("Call me with the SVG as a parameter.")
 	svgFilename = args[0]
@@ -628,7 +639,7 @@ if __name__ == '__main__':
 	if options.force:
 		try:
 			shutil.rmtree(output_directory)
-		except FileExistsError:
+		except FileNotFoundError:
 			pass
 
 	if os.path.isdir(output_directory):
