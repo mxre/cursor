@@ -29,6 +29,7 @@ optParser.add_option('-n','--name',action='store_true',dest='theme_name',help='N
 optParser.add_option('-o','--out',action='store_true',dest='output_directory',help='Cursor theme output directory')
 optParser.add_option('-c','--clean',action='store_true',dest='clean',help='Delete every generated file')
 optParser.add_option('-f','--force',action='store_true',dest='force',help='Overwrite existing cursor theme')
+optParser.add_option('-a','--anicur',action='store_true',dest='anicur',help='Use anicursorgen.py to generate a Windows cursor set')
 
 # generated cursor sizes
 sizes = [ 24, 32, 48, 64, 96 ]
@@ -43,7 +44,9 @@ hotspots_directory = 'hotspots'
 # directory for generated cursor pngs
 pngs_directory = 'pngs'
 # command used to call inkscape
-inkscape_executable = 'inkscape'
+#inkscape_executable = 'inkscape'
+
+xcursorgen_path = 'xcursorgen'
 
 from xml.sax import saxutils, make_parser, SAXParseException, handler
 from xml.sax.handler import feature_namespaces
@@ -81,11 +84,11 @@ def set_blocking(file):
 class Inkscape:
 	""" Inkscape process handle """
 
-	def __init__(self, path, svgLayerHandler):
+	def __init__(self, svgLayerHandler):
 		self.fd = svgLayerHandler.fd
 
 		self._process = subprocess.Popen(
-			[ path, "--shell" ],
+			[ 'flatpak', 'run', 'org.inkscape.Inkscape', '--shell' ],
 			stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
 			encoding='utf8', pass_fds=[ self.fd ])
 		
@@ -207,11 +210,6 @@ class SVGRect:
 		dbg("crop: {} {} ({},{},{},{})".format(self.name, size, x, y, x + w, y + h))
 		img = image.crop((x, y, x + w, y + h))
 		img.save("{opath}/{size}/{slice}.png".format(size=size, opath=pngs_directory, slice=self.name))
-
-	def cmp(self):
-		""" compare for alphabethical sort """
-
-		return self.name
 
 	def writeCursorConfig(self, pngs_directory, hotspots_directory):
 		"""
@@ -487,7 +485,7 @@ class SVGLayerHandler(SVGHandler):
 		elif name == 'title':
 			self.endElement_title(name)
 		elif name == 'svg':
-			self.svg_rects.sort(key=SVGRect.cmp)
+			self.svg_rects.sort(key=lambda x: x.name)
 
 	def fixBoundingBoxes(self, bb):
 		""" Load bounding box information from inkscape output """
@@ -528,10 +526,41 @@ def generateXCursor(pngs_directory, hotspots_directory):
 			odir=output_directory, hotspots=hotspots_directory, name=name))
 		subprocess.run(
 			[
-				"xcursorgen", "--prefix", pngs_directory,
-				"{}/{}.in".format(hotspots_directory, name),
-				"{}/cursors/{}".format(output_directory, name)
+				xcursorgen_path, '--prefix', pngs_directory,
+				'{}/{}.in'.format(hotspots_directory, name),
+				'{}/cursors/{}'.format(output_directory, name)
 			], check = True)
+
+def generateWindowsCursor(pngs_directory, hotspots_directory):
+	for entry in os.scandir(hotspots_directory):
+		if not entry.name.endswith('.in') or not entry.is_file():
+			continue
+		name = os.path.splitext(entry.name)[0]
+		if is_animated_cursor(hotspots_directory, name):
+			suffix = 'ani'
+		else:
+			suffix = 'cur'
+		subprocess.run(
+			[
+				'./anicursorgen.py', '--prefix', pngs_directory,
+				'{}/{}.in'.format(hotspots_directory, name),
+				'{}/{}.{}'.format(output_directory, name, suffix)
+			], check = True)
+
+def is_animated_cursor(hotspots_directory, name):
+	""" Check if configuration file belongs to an animated cursor """
+	with open('{}/{}.in'.format(hotspots_directory, name), 'r') as f:
+		for l in f.readlines():
+			line = l.split()
+			try:
+				duration = int(line[4])
+			except:
+				continue
+			if duration > 0:
+				return True
+		return False
+
+		
 
 def make_animated_cursor_apng(pngs_directory, size, name):
 	p = subprocess.run([
@@ -611,7 +640,7 @@ if __name__ == '__main__':
 	os.makedirs(hotspots_directory, exist_ok=True)
 
 	# setup handle to inkscape shell
-	with Inkscape(inkscape_executable, svgLayerHandler) as inkscape:
+	with Inkscape(svgLayerHandler) as inkscape:
 		# render pngs of of cursors
 		for size in sizes:
 			info("Generating PNGs for size: {}".format(size))
@@ -627,19 +656,25 @@ if __name__ == '__main__':
 	for rect in svgLayerHandler.svg_rects:
 		rect.writeCursorConfig(pngs_directory, hotspots_directory)
 	
-	generateXCursor(pngs_directory, hotspots_directory)
+	if options.anicur:
+		generateWindowsCursor(pngs_directory, hotspots_directory)
+	else:
+		generateXCursor(pngs_directory, hotspots_directory)
 
-	info("Writing metadata for theme '{}'".format(svgLayerHandler.title))
-	# generate theme
-	svgLayerHandler.linkCursorNames(icon_names_database, output_directory)
-	svgLayerHandler.writeThemeDescription(output_directory)
+	if not options.anicur:
+		info("Writing metadata for theme '{}'".format(svgLayerHandler.title))
+		# generate theme
+		svgLayerHandler.linkCursorNames(icon_names_database, output_directory)
+		svgLayerHandler.writeThemeDescription(output_directory)
 
 	info('All Done.')
 
 	if options.test:
 		# make an animation preview
-		for size in sizes:
-			make_animated_cursor_apng(pngs_directory, size, "left_ptr_watch")
+		for rect in svgLayerHandler.svg_rects:
+			if rect.is_animated_cursor(hotspots_directory, rect.name):
+				for size in sizes:
+					make_animated_cursor_apng(pngs_directory, size, rect.name)
 	else:
 		shutil.rmtree(pngs_directory)
 		shutil.rmtree(hotspots_directory)
