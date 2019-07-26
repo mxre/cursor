@@ -1,0 +1,48 @@
+# svgo --config svgo.yml --pretty --indent=1 -i svgs/theme_inkscape.svg -o svgs/theme.svg
+
+multipass: true
+
+plugins:
+  - addAttributesToSVGElement: false
+  - addClassesToSVGElement: false
+  - cleanupAttrs: true
+  - cleanupEnableBackground: true
+  - cleanupIDs: false
+  - cleanupListOfValues: true
+  - cleanupNumericValues:
+      floatPrecision: 2
+  - collapseGroups: false
+  - convertColors: true
+  - convertPathData: true
+  - convertShapeToPath: false
+  - convertStyleToAttrs: true
+  - convertTransform: true
+  - mergePaths: true
+  - minifyStyles: true
+  - moveElemsAttrsToGroup: true
+  - moveGroupAttrsToElems: true
+  - removeAttrs: true
+  - removeComments: true
+  - removeDesc: false
+  - removeDimensions: false
+  - removeDoctype: false
+  - removeEditorsNSData: false
+  - removeElementsByAttr: true
+  - removeEmptyAttrs: true
+  - removeEmptyContainers: true
+  - removeEmptyText: true
+  - removeHiddenElems: false
+  - removeMetadata: true
+  - removeNonInheritableGroupAttrs: true
+  - removeRasterImages: true
+  - removeStyleElement: false
+  - removeTitle: false
+  - removeUnknownsAndDefaults: true
+  - removeUnusedNS: true
+  - removeUselessDefs: true
+  - removeUselessStrokeAndFill: true
+  - removeViewBox: true
+  - removeXMLNS: false
+  - removeXMLProcInst: true
+  - sortAttrs: true
+  - transformsWithOnePath: true
