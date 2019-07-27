@@ -659,7 +659,10 @@ if __name__ == '__main__':
 
 	if os.path.isdir(output_directory):
 		fatalError("Theme directory exists, run with -f or --force to overwrite")
-	os.makedirs('{}/cursors'.format(output_directory))
+	if options.anicur:
+		os.makedirs('{}'.format(output_directory))
+	else:
+		os.makedirs('{}/cursors'.format(output_directory))
 
 	for size in sizes:
 		os.makedirs('{}/{}'.format(pngs_directory, size), exist_ok=True)
