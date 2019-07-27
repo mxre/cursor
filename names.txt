@@ -16,7 +16,6 @@ circle no-drop
 hand pointer pointing_hand hand2 e29285e634086352946a0e7090d73106
 openhand grab hand1 5aca4d189052212118709018842178c0 9d800788f1b08800ae810202380a0822 
 closedhand grabbing dnd-none 208530c400c041818281048008011002
-fleur move 4498f0e0c1937ffe01fd06f973665830 9081237383d90e509aa00f00170e968f
 dnd-move
 dnd-copy
 dnd-link
@@ -39,6 +38,9 @@ zoom-out zoom_out f41c0e382c97c0938e07017e42800402
 dot
 size_all
 all-scroll
+# map to closed hand
+closedhand fleur 4498f0e0c1937ffe01fd06f973665830
+size_all move 9081237383d90e509aa00f00170e968f
 
 sb_up_arrow up-arrow up_arrow
 sb_right_arrow right-arrow right_arrow 
