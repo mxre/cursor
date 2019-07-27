@@ -599,7 +599,7 @@ def make_animated_cursor_apng(pngs_directory, size, name):
 			dest_dir=pngs_directory, size=size, name=name, ext=animated_preview_format['suffix'])
 	], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf8')
 
-	if p.returncode != 0:	
+	if p.returncode != 0 or options.debug:	
 		print(p.stdout)
 
 if __name__ == '__main__':
