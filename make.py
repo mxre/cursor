@@ -504,7 +504,7 @@ class SVGLayerHandler(SVGHandler):
 			layer.slice = (sl['x'], sl['y'], sl['w'], sl['h'])
 			try:
 				hs = bb['hotspot.' + layer.name]
-				layer.hotspot = (hs['x'] - sl['x'] + hs['w']/2, hs['y'] - sl['y'] + hs['h']/2)
+				layer.hotspot = (hs['x'] - sl['x'], hs['y'] - sl['y'])
 			except KeyError:
 				warn("{} has no hotspot defined, defaulting to (0, 0)".format(layer.name))
 				layer.hotspot(0,0)
