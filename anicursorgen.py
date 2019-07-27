@@ -329,7 +329,7 @@ def parse_config_from (inp, prefix):
     if len (words) > 4:
       try:
         # xcursorgen uses msec .cur files expects jiffies
-        duration = round(1000.0 / int(words[4]) * 60.0)
+        duration = round(int(words[4]) * 0.06)
       except:
         continue
     else:
