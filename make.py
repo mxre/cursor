@@ -19,21 +19,20 @@ Please remember to HIDE the slices layer before exporting, so that the rectangle
 # xcursorgen is provided with the scaled and cropped pngs for each cursor and the corresponding hotspot information
 # names.txt (real name is the first in each line, link names come after that, spaces seperated) generates symlinks for the theme
 
-from optparse import OptionParser
+import argparse
 
-optParser = OptionParser()
-optParser.add_option('-d','--debug',action='store_true',dest='debug',help='Enable extra debugging info')
-optParser.add_option('-v','--verbose',action='store_true',dest='verbose',help='Enable info output')
-optParser.add_option('-t','--test',action='store_true',dest='test',help='Keep intermediary data files')
-optParser.add_option('-n','--name',action='store_true',dest='theme_name',help='Name of the new cursor theme')
-optParser.add_option('-o','--out',action='store_true',dest='output_directory',help='Cursor theme output directory')
-optParser.add_option('-c','--clean',action='store_true',dest='clean',help='Delete every generated file')
-optParser.add_option('-f','--force',action='store_true',dest='force',help='Overwrite existing cursor theme')
-optParser.add_option('-a','--anicur',action='store_true',dest='anicur',help='Use anicursorgen.py to generate a Windows cursor set')
-
-if __name__ == '__main__':
-	# parse command line into arguments and options
-	(options, args) = optParser.parse_args()
+args_parser = argparse.ArgumentParser("Convert SVG to cursor theme")
+args_parser.add_argument('-d','--debug',action='store_true',dest='debug',help='Enable extra debugging info')
+args_parser.add_argument('-v','--verbose',action='store_true',dest='verbose',help='Enable info output')
+args_parser.add_argument('-t','--test',action='store_true',dest='test',help='Keep intermediary data files')
+args_parser.add_argument('-c','--clean',action='store_true',dest='clean',help='Delete every generated file')
+args_parser.add_argument('-f','--force',action='store_true',dest='force',help='Overwrite existing cursor theme')
+args_parser.add_argument('-n','--name',action='store',dest='theme_name',help='Name of the new cursor theme')
+args_parser.add_argument('input_file',nargs=1,help='Input SVG file')
+args_parser.add_argument('-o','--out',action='store',dest='output_directory',help='Cursor theme output directory')
+args_parser.add_argument('-a','--anicur',action='store_true',dest='anicur',help='Use anicursorgen.py to generate a Windows cursor set')
+args_parser.add_argument('--sizes',action='store',dest='sizes',help='Override cursor sizes, sorted comma seprated list of values (default: 24,32,48,64,96)')
+args_parser.add_argument('--fps',action='store',dest='fps',help='Override FPS for animated cursors (default: 16.6)')
 
 # generated cursor sizes
 sizes = [ 24, 32, 48, 64, 96 ]
@@ -41,22 +40,31 @@ sizes = [ 24, 32, 48, 64, 96 ]
 fps = 16.66666
 
 # synonym database for X11 cursor
-icon_names_database = "names.txt"
+icon_names_database = 'names.txt'
 
 # directory for generated hotspots includes for xcursorgen
 hotspots_directory = 'hotspots'
 # directory for generated cursor pngs
 pngs_directory = 'pngs'
-# command used to call inkscape
-#inkscape_executable = 'inkscape'
 
+# command used to call inkscape shell mode
+inkscape_command = [ 'flatpak', 'run', 'org.inkscape.Inkscape', '--shell' ]
+# executable for xcursorgen
 xcursorgen_path = 'xcursorgen'
+# executable for ffmpeg (used to generated animated previews in -t mode)
+ffmpeg_path = 'ffmpeg'
+# animated preview format (for ffmpeg) and file suffix
+animated_preview_format = { 'ffmpeg_format': 'apng', 'suffix': 'apng'}
 
 from xml.sax import saxutils, make_parser, SAXParseException, handler
 from xml.sax.handler import feature_namespaces
 import os, sys, stat, tempfile, shutil
 import subprocess, fcntl, gzip
 import PIL.Image
+
+if __name__ == '__main__':
+	# parse command line into arguments and options
+	options = args_parser.parse_args()
 
 def dbg(msg):
 	if options.debug:
@@ -92,7 +100,7 @@ class Inkscape:
 		self.fd = svgLayerHandler.fd
 
 		self._process = subprocess.Popen(
-			[ 'flatpak', 'run', 'org.inkscape.Inkscape', '--shell' ],
+			inkscape_command,
 			stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
 			encoding='utf8', pass_fds=[ self.fd ])
 		
@@ -183,7 +191,7 @@ class Inkscape:
 			w=w, h=h, output=output, input=input))
 
 	def close(self):
-		msg = self._process.communicate("quit\n")
+		msg = self._process.communicate('quit\n')
 		os.close(self.fd)
 		dbg(msg[0])
 		dbg(msg[1])
@@ -213,7 +221,7 @@ class SVGRect:
 		h = round(self.slice[3] * scale)
 		dbg("crop: {} {} ({},{},{},{})".format(self.name, size, x, y, x + w, y + h))
 		img = image.crop((x, y, x + w, y + h))
-		img.save("{opath}/{size}/{slice}.png".format(size=size, opath=pngs_directory, slice=self.name))
+		img.save('{opath}/{size}/{slice}.png'.format(size=size, opath=pngs_directory, slice=self.name))
 
 	def writeCursorConfig(self, pngs_directory, hotspots_directory):
 		"""
@@ -226,17 +234,8 @@ class SVGRect:
 		A file named `hotspots_directory`/`slice_name`.in will be created
 		"""
 
-		sliceName = self.name
-		frame = -1
+		(sliceName, frame) = get_animated_cursor_name(self.name)
 
-		# check for animated cursor
-		if sliceName[-5:].startswith('_'):
-			try:
-				frame = int(sliceName[-4:])
-				sliceName = sliceName[:-5]
-			except ValueError:
-				pass
-		
 		dbg("xcursor.in: {} frame {}".format(sliceName, frame))
 		
 		if frame == -1 or frame == 1:
@@ -253,7 +252,7 @@ class SVGRect:
 				scale = size / round(self.slice[2])
 				x = round(self.hotspot[0] * scale)
 				y = round(self.hotspot[1] * scale)
-				line = "{size} {x} {y} {size}/{name}.png{delay}".format(
+				line = '{size} {x} {y} {size}/{name}.png{delay}'.format(
 					size=size, x=x, y=y, name=self.name, delay=delay)
 				dbg(line)
 				f.write(line + '\n')
@@ -270,7 +269,7 @@ class SVGHandler(handler.ContentHandler):
 	def writeThemeDescription(self, output_directory=None):
 		if output_directory is None:
 			output_directory = self.title
-		with open("{}/index.theme".format(output_directory), "w") as f:
+		with open('{}/index.theme'.format(output_directory), "w") as f:
 			f.write('[Icon Theme]\n')
 			f.write('Name="{}"\n'.format(self.title))
 	
@@ -279,7 +278,7 @@ class SVGHandler(handler.ContentHandler):
 
 		if output_directory is None:
 			output_directory = self.title
-		dirfd = os.open("{}/cursors".format(output_directory), os.O_DIRECTORY)
+		dirfd = os.open('{}/cursors'.format(output_directory), os.O_DIRECTORY)
 		try:
 			with open(names) as f:
 				for l in f.readlines():
@@ -382,10 +381,10 @@ class SVGLayerHandler(SVGHandler):
 	def _openFile(self):
 		# open svg and compressed svgz alike
 		suffix = os.path.splitext(svgFilename)[1]
-		if suffix == ".svg":
-			return open(svgFilename, "r")
-		elif suffix in [ ".svgz", ".gz" ]:
-			return gzip.open(svgFilename, "r")
+		if suffix == '.svg':
+			return open(svgFilename, 'r')
+		elif suffix in [ '.svgz', '.gz' ]:
+			return gzip.open(svgFilename, 'r')
 		else:
 			fatalError("Unknown file extension: {}".format(suffix))
 
@@ -407,7 +406,7 @@ class SVGLayerHandler(SVGHandler):
 			return attrs['display'] == 'none'
 		except KeyError:
 			try:
-				return attrs['style'] == 'display:none'
+				return 'display:none' in attrs['style']
 			except KeyError:
 				False	
 
@@ -427,7 +426,7 @@ class SVGLayerHandler(SVGHandler):
 		Otherwise, the layer will simply be ignored.
 		"""
 
-		dbg('found layer: name="{}"'.format(name))
+		dbg("found layer: name='{}'".format(name))
 		if attrs.get('inkscape:groupmode', None) == 'layer':
 			if self._inSlicesLayer() or attrs['inkscape:label'] == 'slices':
 				self._layer_nests += 1
@@ -444,7 +443,7 @@ class SVGLayerHandler(SVGHandler):
 		Just undoes any flags set previously.
 		"""
 
-		dbg('leaving layer: name="{}"'.format(name))
+		dbg("leaving layer: name='{}'".format(name))
 		if self._inSlicesLayer():
 			self._layer_nests -= 1
 
@@ -469,7 +468,7 @@ class SVGLayerHandler(SVGHandler):
 		"""Generic hook for examining and/or parsing all SVG tags"""
 
 		if options.debug:
-			dbg('Beginning element "{}"'.format(name))
+			dbg("Beginning element '{}'".format(name))
 		if name == 'svg':
 			self.startElement_svg(name, attrs)
 		elif name == 'title':
@@ -483,7 +482,7 @@ class SVGLayerHandler(SVGHandler):
 	def endElement(self, name):
 		"""Generic hook called when the parser is leaving each SVG tag"""
 
-		dbg('Ending element "{}"'.format(name))
+		dbg("Ending element '{}'".format(name))
 		if name == 'g':
 			self._endElement_layer(name)
 		elif name == 'title':
@@ -504,7 +503,7 @@ class SVGLayerHandler(SVGHandler):
 				fatalError("SVG slice {} of inconsitent size: {} != {}".format(layer.name, self.size, sl['w']))
 			layer.slice = (sl['x'], sl['y'], sl['w'], sl['h'])
 			try:
-				hs = bb["hotspot." + layer.name]
+				hs = bb['hotspot.' + layer.name]
 				layer.hotspot = (hs['x'] - sl['x'] + hs['w']/2, hs['y'] - sl['y'] + hs['h']/2)
 			except KeyError:
 				warn("{} has no hotspot defined, defaulting to (0, 0)".format(layer.name))
@@ -523,7 +522,7 @@ def generateXCursor(pngs_directory, hotspots_directory):
 	"""
 
 	for entry in os.scandir(hotspots_directory):
-		if not entry.name.endswith(".in") or not entry.is_file():
+		if not entry.name.endswith('.in') or not entry.is_file():
 			continue
 		name = os.path.splitext(entry.name)[0]
 		dbg("xcursorgen {hotspots}/{name}.in {odir}/cursors/{name}".format(
@@ -563,6 +562,18 @@ if options.anicur:
 			make_cursor_from(input_config, output_file, args)
 			input_config.close()
 
+def get_animated_cursor_name(name):
+	sliceName = name
+	frame = -1
+
+	if sliceName[-5:].startswith('_'):
+		try:
+			frame = int(sliceName[-4:])
+			sliceName = sliceName[:-5]
+		except ValueError:
+			pass
+	return (sliceName, frame)
+
 def is_animated_cursor(hotspots_directory, name):
 	""" Check if configuration file belongs to an animated cursor """
 	with open('{}/{}.in'.format(hotspots_directory, name), 'r') as f:
@@ -578,22 +589,21 @@ def is_animated_cursor(hotspots_directory, name):
 
 def make_animated_cursor_apng(pngs_directory, size, name):
 	p = subprocess.run([
-		"ffmpeg",
-		"-i", "{src_dir}/{size}/{name}_%04d.png".format(src_dir=pngs_directory, size=size, name=name),
-		"-plays", "0",
-		"-r", "{:.2f}".format(fps),
-		"-f", "apng",
-		"-y",
-		"{dest_dir}/{name}_{size}.apng".format(dest_dir=pngs_directory, size=size, name=name)
-	], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="utf8")
+		ffmpeg_path,
+		'-i', '{src_dir}/{size}/{name}_%04d.png'.format(src_dir=pngs_directory, size=size, name=name),
+		'-plays', '0', # loop indefinetly
+		'-r', '{:.2f}'.format(fps),
+		'-f', animated_preview_format['ffmpeg_format'],
+		'-y', # always overwrite output file
+		'{dest_dir}/{name}_{size}.{ext}'.format(
+			dest_dir=pngs_directory, size=size, name=name, ext=animated_preview_format['suffix'])
+	], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf8')
 
 	if p.returncode != 0:	
 		print(p.stdout)
 
 if __name__ == '__main__':
-	if len(args) != 1:
-		fatalError("Call me with the SVG as a parameter.")
-	svgFilename = args[0]
+	svgFilename = options.input_file[0]
 
 	info("Parsing file {}".format(svgFilename))
 	# Try to parse the svg file
@@ -642,8 +652,13 @@ if __name__ == '__main__':
 		except FileNotFoundError:
 			pass
 
+	if options.fps:
+		fps = float(options.fps)
+	if options.sizes:
+		sizes = list(map(lambda x: int(x), options.sizes.split(',')))
+
 	if os.path.isdir(output_directory):
-		fatalError("Theme output directoy exists, run with -f or --force to overwrite")
+		fatalError("Theme directory exists, run with -f or --force to overwrite")
 	os.makedirs('{}/cursors'.format(output_directory))
 
 	for size in sizes:
@@ -655,9 +670,9 @@ if __name__ == '__main__':
 		# render pngs of of cursors
 		for size in sizes:
 			info("Generating PNGs for size: {}".format(size))
-			output = "{opath}/{size}.png".format(size=size, opath=pngs_directory)
+			output = '{opath}/{size}.png'.format(size=size, opath=pngs_directory)
 			inkscape.renderSVG(svgLayerHandler, size, output)
-			with PIL.Image.open(output, "r") as img:
+			with PIL.Image.open(output, 'r') as img:
 				# loop through each slice rectangle, crop the corresponding pngs
 				for rect in svgLayerHandler.svg_rects:
 						rect.cropFromTemplate(img, size, pngs_directory)
@@ -678,14 +693,17 @@ if __name__ == '__main__':
 		svgLayerHandler.linkCursorNames(icon_names_database, output_directory)
 		svgLayerHandler.writeThemeDescription(output_directory)
 
-	info('All Done.')
-
 	if options.test:
 		# make an animation preview
 		for rect in svgLayerHandler.svg_rects:
-			if rect.is_animated_cursor(hotspots_directory, rect.name):
+			(name, frame) = get_animated_cursor_name(rect.name)
+			if frame == 1: # only generate for once per frameset
+				info("Generating animated preview for: '{}'".format(name))
 				for size in sizes:
-					make_animated_cursor_apng(pngs_directory, size, rect.name)
+					make_animated_cursor_apng(pngs_directory, size, name)
 	else:
+		info("Cleanup")
 		shutil.rmtree(pngs_directory)
 		shutil.rmtree(hotspots_directory)
+
+	info("All Done.")
