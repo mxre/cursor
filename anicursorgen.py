@@ -149,6 +149,9 @@ def make_cur (frames, args, animated=False):
     frame_offsets[i].append (frame_offset)
 
     frame_png = Image.open (frame[3])
+    frame_png1 = frame_png.crop((0,0,width,width))
+    frame_png.close ()
+    frame_png = frame_png1
 
     if args.add_shadows:
       succeeded, shadowed = create_shadow (frame_png, args)
@@ -318,6 +321,8 @@ def parse_config_from (inp, prefix):
 
     try:
       size = int (words[0])
+      if size == 24:
+        size = 32
       hotx = int (words[1])
       hoty = int (words[2])
       filename = words[3]
