@@ -33,6 +33,7 @@ args_parser.add_argument('-o','--out',action='store',dest='output_directory',hel
 args_parser.add_argument('-a','--anicur',action='store_true',dest='anicur',help='Use anicursorgen.py to generate a Windows cursor set')
 args_parser.add_argument('--sizes',action='store',dest='sizes',help='Override cursor sizes, sorted comma seprated list of values (default: 24,32,48,64,96)')
 args_parser.add_argument('--fps',action='store',dest='fps',help='Override FPS for animated cursors (default: 16.6)')
+args_parser.add_argument('-s', '--shadow',action='store_true',dest='shadow',help='Render cursor drop shadow from SVG')
 
 # generated cursor sizes
 sizes = [ 24, 32, 48, 64, 96 ]
@@ -56,11 +57,12 @@ ffmpeg_path = 'ffmpeg'
 # animated preview format (for ffmpeg) and file suffix
 animated_preview_format = { 'ffmpeg_format': 'apng', 'suffix': 'apng'}
 
-from xml.sax import saxutils, make_parser, SAXParseException, handler
+from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
 from xml.sax.handler import feature_namespaces
-import os, sys, stat, tempfile, shutil
+import os, sys, stat, shutil
 import subprocess, fcntl, gzip, re
 import PIL.Image
+from tempfile import TemporaryFile
 
 if __name__ == '__main__':
 	# parse command line into arguments and options
@@ -113,7 +115,7 @@ class SVGRect:
 		A file named `hotspots_directory`/`slice_name`.in will be created
 		"""
 
-		(sliceName, frame) = get_animated_cursor_name(self.name)
+		(sliceName, frame) = self.get_animated_cursor_name()
 
 		dbg("xcursor.in: {} frame {}".format(sliceName, frame))
 		
@@ -135,6 +137,18 @@ class SVGRect:
 					size=size, x=x, y=y, name=self.name, delay=delay)
 				dbg(line)
 				f.write(line + '\n')
+	
+	def get_animated_cursor_name(self):
+		sliceName = self.name
+		frame = -1
+
+		if sliceName[-5:].startswith('_'):
+			try:
+				frame = int(sliceName[-4:])
+				sliceName = sliceName[:-5]
+			except ValueError:
+				pass
+		return (sliceName, frame)
 
 class SVGHandler(handler.ContentHandler):
 	"""Base class for SVG document"""
@@ -247,7 +261,7 @@ class SVGLayerHandler(SVGHandler):
 		self.svgFilename = svgFilename
 		# read by inkscape
 		self.size = None
-		self.file = self._openFile()
+		self.file = TemporaryFile(mode='w+', encoding='utf8')
 
 		# named slices bounding box will be added later by inkscape
 		self.svg_rects = []
@@ -259,17 +273,33 @@ class SVGLayerHandler(SVGHandler):
 		self._name = None
 		self._re_translate = re.compile(r'translate\((-?[0-9]+(?:\.[0-9]+)?)[, ](-?[0-9]+(?:\.[0-9]+)?)\)')
 		# run parser
+		self._filter_svg(self._openFile(), self.file)
+		self.file.seek(0)
 		self._runParser()
 		
 	def _openFile(self):
 		# open svg and compressed svgz alike
 		suffix = os.path.splitext(svgFilename)[1]
 		if suffix == '.svg':
-			return open(svgFilename, 'r')
+			return open(svgFilename, 'r', encoding='utf8')
 		elif suffix in [ '.svgz', '.gz' ]:
-			return gzip.open(svgFilename, 'r')
+			return gzip.open(svgFilename, 'r', encoding='utf8')
 		else:
 			fatalError("Unknown file extension: {}".format(suffix))
+
+	def _filter_svg(self, input, output):
+		output_gen = saxutils.XMLGenerator(output)
+		parser = make_parser()
+		mode = ""
+		if options.shadow:
+			mode += "shadows,"
+		filter = SVGFilter(parser, output_gen, mode)
+		filter.setFeature(handler.feature_namespaces, False)
+		filter.setErrorHandler(handler.ErrorHandler())
+		filter.parse(input)
+		del filter
+		del parser
+		del output_gen
 
 	def _runParser(self):
 		xmlParser = make_parser()
@@ -283,6 +313,7 @@ class SVGLayerHandler(SVGHandler):
 		except SAXParseException as e:
 			fatalError("Error parsing SVG file '{}': {},{}: {}.  If you're seeing this within inkscape, it probably indicates a bug that should be reported.".format(
 				self.svgFilename, e.getLineNumber(), e.getColumnNumber(), e.getMessage()))
+		del xmlParser
 
 	def _isHidden(self, attrs):
 		try:
@@ -461,18 +492,6 @@ if options.anicur:
 			make_cursor_from(input_config, output_file, args)
 			input_config.close()
 
-def get_animated_cursor_name(name):
-	sliceName = name
-	frame = -1
-
-	if sliceName[-5:].startswith('_'):
-		try:
-			frame = int(sliceName[-4:])
-			sliceName = sliceName[:-5]
-		except ValueError:
-			pass
-	return (sliceName, frame)
-
 def is_animated_cursor(hotspots_directory, name):
 	""" Check if configuration file belongs to an animated cursor """
 	with open('{}/{}.in'.format(hotspots_directory, name), 'r') as f:
@@ -500,6 +519,86 @@ def make_animated_cursor_apng(pngs_directory, size, name):
 
 	if p.returncode != 0 or options.debug:	
 		print(p.stdout)
+
+class SVGFilter(saxutils.XMLFilterBase):
+	def __init__(self, upstream, downstream, mode, **kwargs):
+		saxutils.XMLFilterBase.__init__(self, upstream)
+		self._downstream = downstream
+		self.mode = mode
+
+	def startDocument(self):
+		self.in_throwaway_layer_stack = [False]
+
+	def startElement(self, localname, attrs):
+		def modify_style (style, old_style, new_style=None):
+			styles = style.split (';')
+			new_styles = []
+			if old_style is not None:
+				match_to = old_style + ':'
+			for s in styles:
+				if len (s) > 0 and (old_style is None or not s.startswith (match_to)):
+					new_styles.append(s)
+			if new_style is not None:
+				new_styles.append(new_style)
+			return ';'.join(new_styles)
+
+		dict = {}
+		is_throwaway_layer = False
+		is_slices = False
+		is_hotspots = False
+		is_shadows = False
+		is_layer = False
+		if localname == 'g':
+			for key, value in attrs.items():
+				if key == 'inkscape:label':
+					if value == 'slices':
+						is_slices = True
+					elif value == 'hotspots':
+						is_hotspots = True
+					elif value == 'shadow':
+						is_shadows = True
+				elif key == 'inkscape:groupmode':
+					if value == 'layer':
+						is_layer = True
+		idict = {}
+		idict.update(attrs)
+		if 'style' not in attrs.keys():
+			idict['style'] = ''
+		for key, value in idict.items():
+			alocalname = key
+			if alocalname == 'style':
+				had_style = True
+			if alocalname == 'style' and is_slices:
+				value = modify_style(value, 'display', 'display:none')
+			if alocalname == 'style' and is_hotspots:
+				if 'hotspots,' in self.mode:
+					value = modify_style(value, 'display', 'display:inline')
+				else:
+					value = modify_style(value, 'display', 'display:none')
+			if alocalname == 'style' and is_shadows:
+				if 'shadows,' in self.mode:
+					value = modify_style(value, 'filter', 'filter:url(#drop_shadow)')
+				else:
+					value = modify_style(value, 'filter', None)
+			value = modify_style(value, 'shape-rendering', None)
+			dict[key] = value
+
+		if self.in_throwaway_layer_stack[0] or is_throwaway_layer:
+			self.in_throwaway_layer_stack.insert(0, True)
+		else:
+			self.in_throwaway_layer_stack.insert(0, False)
+			attrs = xmlreader.AttributesImpl(dict)
+			self._downstream.startElement(localname, attrs)
+
+	def characters(self, content):
+		if self.in_throwaway_layer_stack[0]:
+			return
+		self._downstream.characters(content)
+
+	def endElement(self, localname):
+		if self.in_throwaway_layer_stack.pop(0):
+			return
+		self._downstream.endElement(localname)
 
 if __name__ == '__main__':
 	svgFilename = options.input_file[0]
@@ -567,13 +666,10 @@ if __name__ == '__main__':
 		os.makedirs('{}/{}'.format(pngs_directory, size), exist_ok=True)
 	os.makedirs(hotspots_directory, exist_ok=True)
 
-	# setup handle to inkscape shell
-	#with Inkscape(svgLayerHandler) as inkscape:
 	# render pngs of of cursors
 	for size in sizes:
 		info("Generating PNGs for size: {}".format(size))
 		output = '{opath}/{size}.png'.format(size=size, opath=pngs_directory)
-		#inkscape.renderSVG(svgLayerHandler, size, output)
 		svgLayerHandler.renderSVG(output, size)
 		with PIL.Image.open(output, 'r') as img:
 			# loop through each slice rectangle, crop the corresponding pngs
@@ -599,7 +695,7 @@ if __name__ == '__main__':
 	if options.test:
 		# make an animation preview
 		for rect in svgLayerHandler.svg_rects:
-			(name, frame) = get_animated_cursor_name(rect.name)
+			(name, frame) = rect.get_animated_cursor_name()
 			if frame == 1: # only generate for once per frameset
 				info("Generating animated preview for: '{}'".format(name))
 				for size in sizes:

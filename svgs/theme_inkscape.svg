@@ -25,7 +25,7 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter1644">
+       id="drop_shadow">
       <feFlood
          flood-opacity="0.498039"
          flood-color="rgb(0,0,0)"
@@ -608,7 +608,7 @@
     <g
        id="g2444"
        inkscape:label="shadow"
-       style="opacity:1;filter:url(#filter1644)"
+       style="opacity:1;filter:url(#drop_shadow)"
        transform="translate(-0.01461612,-0.03215547)">
       <use
          style="display:inline;opacity:1;shape-rendering:crispEdges;enable-background:new"
