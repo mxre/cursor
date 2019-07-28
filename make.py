@@ -263,7 +263,7 @@ class SVGLayerHandler(SVGHandler):
 		self.svgFilename = svgFilename
 		# read by inkscape
 		self.size = None
-		self.file = TemporaryFile(mode='w+b')
+		self.file = TemporaryFile(mode='w+')
 
 		# named slices bounding box will be added later by inkscape
 		self.svg_rects = {}
@@ -284,14 +284,15 @@ class SVGLayerHandler(SVGHandler):
 		# open svg and compressed svgz alike
 		suffix = os.path.splitext(svgFilename)[1]
 		if suffix == '.svg':
-			return open(svgFilename, 'r', encoding='utf8')
+			return open(svgFilename, 'rb')
 		elif suffix in [ '.svgz', '.gz' ]:
-			return gzip.open(svgFilename, 'r', encoding='utf8')
+			return gzip.open(svgFilename, 'rb')
 		else:
 			fatalError("Unknown file extension: {}".format(suffix))
 
 	def _filter_svg(self, input, output):
-		output_gen = saxutils.XMLGenerator(output)
+		file = os.fdopen(output.fileno(), 'wb', closefd=False)
+		output_gen = saxutils.XMLGenerator(file, encoding='utf8')
 		parser = make_parser()
 		mode = ""
 		if options.shadow:
@@ -303,6 +304,7 @@ class SVGLayerHandler(SVGHandler):
 		del filter
 		del parser
 		del output_gen
+		file.close()
 
 	def _runParser(self):
 		xmlParser = make_parser()
@@ -312,9 +314,9 @@ class SVGLayerHandler(SVGHandler):
 		xmlParser.setContentHandler(self)
 
 		try:
-			xmlParser.parse(os.fdopen(self.file.fileno(), 'r', closefd=False))
+			xmlParser.parse(os.fdopen(self.file.fileno(), 'rb', closefd=False))
 		except SAXParseException as e:
-			fatalError("Error parsing SVG file '{}': {},{}: {}.  If you're seeing this within inkscape, it probably indicates a bug that should be reported.".format(
+			fatalError("Error parsing SVG file '{}': {},{}: {}".format(
 				self.svgFilename, e.getLineNumber(), e.getColumnNumber(), e.getMessage()))
 		del xmlParser
 
