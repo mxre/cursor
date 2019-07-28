@@ -219,7 +219,7 @@ def make_framesets (frames):
   for frameset in framesets:
     for i in range (1, len (frameset)):
       if frameset[i - 1][4] != frameset[i][4]:
-        print ("Frameset {} has duration {} for framesize {}, but {} for framesize {}".format (i, frameset[i][4], frameset[i][0], frameset[i - 1][4], frameset[i - 1][0]), file=sys.stderr)
+        print ("Frameset {0} has duration {1[4]} for framesize {1[0]}, but {2[4]} for framesize {2[0]}".format (i, frameset[i], frameset[i - 1]), file=sys.stderr)
         return None
 
   framesets.sort( key=lambda f: f[0][0], reverse=True)
