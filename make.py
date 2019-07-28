@@ -47,8 +47,8 @@ hotspots_directory = 'hotspots'
 # directory for generated cursor pngs
 pngs_directory = 'pngs'
 
-# command used to call inkscape shell mode
-inkscape_command = [ 'flatpak', 'run', 'org.inkscape.Inkscape', '--shell' ]
+# executable for rsvg-convert
+rsvg_convert_path = 'rsvg-convert'
 # executable for xcursorgen
 xcursorgen_path = 'xcursorgen'
 # executable for ffmpeg (used to generated animated previews in -t mode)
@@ -59,7 +59,7 @@ animated_preview_format = { 'ffmpeg_format': 'apng', 'suffix': 'apng'}
 from xml.sax import saxutils, make_parser, SAXParseException, handler
 from xml.sax.handler import feature_namespaces
 import os, sys, stat, tempfile, shutil
-import subprocess, fcntl, gzip
+import subprocess, fcntl, gzip, re
 import PIL.Image
 
 if __name__ == '__main__':
@@ -80,127 +80,6 @@ def info(msg):
 def fatalError(msg):
 	print("FATAL ERROR: " + msg, file=sys.stderr)
 	sys.exit(20)
-
-def set_nonblocking(file):
-	""" Set fileobject to nonblocking mode """
-
-	mask = fcntl.fcntl(file.fileno(), fcntl.F_GETFL) | os.O_NONBLOCK
-	fcntl.fcntl(file.fileno(), fcntl.F_SETFL, mask)
-
-def set_blocking(file):
-	""" Set fileobject to blocking mode """
-
-	mask = fcntl.fcntl(file.fileno(), fcntl.F_GETFL) & ~os.O_NONBLOCK
-	fcntl.fcntl(file.fileno(), fcntl.F_SETFL, mask)
-
-class Inkscape:
-	""" Inkscape process handle """
-
-	def __init__(self, svgLayerHandler):
-		self.fd = svgLayerHandler.fd
-
-		self._process = subprocess.Popen(
-			inkscape_command,
-			stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-			encoding='utf8', pass_fds=[ self.fd ])
-		
-		bb = self._getBoundingBoxes()
-
-		svgLayerHandler.fixBoundingBoxes(bb)
-
-	def _render(self, args):
-		""" send commandline arguments to inkscape, svg file is appended """
-
-		dbg('inkscape ' + args)
-
-		# flush stdout buffer
-		self._process.stdin.write('\n')
-		self._process.stdin.flush()
-		set_nonblocking(self._process.stdout)
-		text = self._process.stdout.readline()
-		while not text.startswith('>'):
-			if len(text) > 0:
-				dbg(text.rstrip())
-			text = self._process.stdout.readline()
-		
-		self._process.stdin.write(args + ' /proc/self/fd/{}\n'.format(self.fd))
-		self._process.stdin.flush()
-
-		# flush stdout buffer
-		text = self._process.stdout.readline()
-		while not text.startswith('>'):
-			if len(text) > 0:
-				dbg(text.rstrip())
-			text = self._process.stdout.readline()
-		set_blocking(self._process.stdout)
-
-		# check if inkscape is still running
-		if self._process.returncode is not None:
-			msg = self._process.communicate()
-			dbg("inkscape failed with errorcode {}\n{}".format(self._process.returncode, msg[1]))
-			raise RuntimeError("inkscape error")
-
-	def _getBoundingBoxes(self):
-		"""
-		Load bounding boxes for all objects in the document.
-		Positions and size are in user units (should be pixels)
-		"""
-
-		bounding_boxes = dict()
-
-		# flush stdout buffer
-		self._process.stdin.write('\n')
-		self._process.stdin.flush()
-		set_nonblocking(self._process.stdout)
-		text = self._process.stdout.readline()
-		while not text.startswith('>'):
-			if len(text) > 0:
-				dbg(text.rstrip())
-			text = self._process.stdout.readline()
-	
-		self._process.stdin.write('--query-all /proc/self/fd/{}\n'.format(self.fd))
-		self._process.stdin.flush()
-
-		# read list from process stdout
-		text = self._process.stdout.readline()
-		while not text.startswith('>'):
-			if len(text) > 0:
-				dbg(text.rstrip())
-				v = (text.rstrip().split(','))
-				bounding_boxes[v[0]] = { 'x': float(v[1]), 'y': float(v[2]), 'w': float(v[3]), 'h': float(v[4]) }
-			text = self._process.stdout.readline()
-		set_blocking(self._process.stdout)
-		
-		# check if inkscape is still running
-		if self._process.returncode is not None:
-			msg = self._process.communicate()
-			dbg("inkscape failed with errorcode {}\n{}".format(self._process.returncode, msg[1]))
-			raise RuntimeError("inkscape error")
-		return bounding_boxes
-
-	def renderSVG(self, svgLayerHandler, size, output):
-		"""
-		render SVG to PNG output for provided target size.
-		size is the target size for one slice, the whole document is scaled accordingly
-		"""
-
-		scale = size / svgLayerHandler.size
-		w = round(svgLayerHandler.width * scale)
-		h = round(svgLayerHandler.height * scale)
-		self._render('-w {w} -h {h} --export-png="{output}"'.format(
-			w=w, h=h, output=output, input=input))
-
-	def close(self):
-		msg = self._process.communicate('quit\n')
-		os.close(self.fd)
-		dbg(msg[0])
-		dbg(msg[1])
-
-	def __enter__(self):
-		return self
-
-	def __exit__(self, type, value, traceback):
-		self.close()
 
 class SVGRect:
 	"""Manages a simple rectangular area, along with certain attributes such as a name"""
@@ -366,18 +245,22 @@ class SVGLayerHandler(SVGHandler):
 	def __init__(self, svgFilename):
 		SVGHandler.__init__(self)
 		self.svgFilename = svgFilename
-		# named slices bounding box will be added later by inkscape
-		self.svg_rects = []
-		self._layer_nests = 0
-		self.slices_hidden = False
-		self.hotspots_hidden = False
 		# read by inkscape
 		self.size = None
 		self.file = self._openFile()
-		# handle for inkscape
-		self.fd = os.dup(self.file.fileno())
-		self._runParser()
 
+		# named slices bounding box will be added later by inkscape
+		self.svg_rects = []
+		self.slices_hidden = False
+		self.hotspots_hidden = False
+
+		self._layer_nests = 0
+		self._translate = (0,0)
+		self._name = None
+		self._re_translate = re.compile(r'translate\((-?[0-9]+(?:\.[0-9]+)?)[, ](-?[0-9]+(?:\.[0-9]+)?)\)')
+		# run parser
+		self._runParser()
+		
 	def _openFile(self):
 		# open svg and compressed svgz alike
 		suffix = os.path.splitext(svgFilename)[1]
@@ -396,7 +279,7 @@ class SVGLayerHandler(SVGHandler):
 		xmlParser.setContentHandler(self)
 
 		try:
-			xmlParser.parse(self.file)
+			xmlParser.parse(os.fdopen(self.file.fileno(), 'r', closefd=False))
 		except SAXParseException as e:
 			fatalError("Error parsing SVG file '{}': {},{}: {}.  If you're seeing this within inkscape, it probably indicates a bug that should be reported.".format(
 				self.svgFilename, e.getLineNumber(), e.getColumnNumber(), e.getMessage()))
@@ -426,13 +309,24 @@ class SVGLayerHandler(SVGHandler):
 		Otherwise, the layer will simply be ignored.
 		"""
 
-		dbg("found layer: name='{}'".format(name))
+		try:
+			dbg("found layer: name='{}'".format(attrs['inkscape:label']))
+		except KeyError:
+			dbg("found layer: name='{}'".format(attrs['id']))
+
 		if attrs.get('inkscape:groupmode', None) == 'layer':
 			if self._inSlicesLayer() or attrs['inkscape:label'] == 'slices':
 				self._layer_nests += 1
 
 			if attrs['inkscape:label'] == 'slices':
 				self.slices_hidden = self._isHidden(attrs)
+				try:
+					m = self._re_translate.match(attrs['transform'])
+					self._translate = (float(m.group(1)), float(m.group(2)))
+					dbg(self._translate)
+				except (AttributeError, KeyError) as e:
+					self._translate = (0,0)
+					dbg(e)
 			elif attrs['inkscape:label'] == 'hotspots':
 				self.hotspots_hidden = self._isHidden(attrs)
 
@@ -446,6 +340,16 @@ class SVGLayerHandler(SVGHandler):
 		dbg("leaving layer: name='{}'".format(name))
 		if self._inSlicesLayer():
 			self._layer_nests -= 1
+			for i in self.svg_rects:
+				i.slice = (
+					(i.slice[0] + self._translate[0]) * 3.7795,
+					((i.slice[1] + self._translate[1])) * 3.7795,
+					i.slice[2] * 3.7795,
+					i.slice[3] * 3.7795)
+				if self.size is None:
+					self.size = round(i.slice[2])
+				dbg("{} ({}, {}, {}, {}) ({}, {})".format(i.name, i.slice[0], i.slice[1], i.slice[2], i.slice[3], self._translate[0], self._translate[1]))
+
 
 	def _startElement_rect(self, name, attrs):
 		"""
@@ -462,6 +366,11 @@ class SVGLayerHandler(SVGHandler):
 			except KeyError:
 				name = attrs['id']
 			rect = SVGRect(name)
+			rect.slice = (
+				float(attrs['x']),
+				float(attrs['y']),
+				float(attrs['width']),
+				float(attrs['height']))
 			self._add(rect)
 
 	def startElement(self, name, attrs):
@@ -490,29 +399,19 @@ class SVGLayerHandler(SVGHandler):
 		elif name == 'svg':
 			self.svg_rects.sort(key=lambda x: x.name)
 
-	def fixBoundingBoxes(self, bb):
-		""" Load bounding box information from inkscape output """
-
-		for layer in self.svg_rects:
-			sl = bb[layer.name]
-			if round(sl['h']) != round(sl['w']):
-				fatalError("SVG slice {} not square: {} != {}".format(layer.name, sl['w'], sl['h']))
-			if self.size is None:
-				self.size = round(sl['w'])
-			elif self.size != round(sl['w']) or self.size != round(sl['h']):
-				fatalError("SVG slice {} of inconsitent size: {} != {}".format(layer.name, self.size, sl['w']))
-			layer.slice = (sl['x'], sl['y'], sl['w'], sl['h'])
-			try:
-				hs = bb['hotspot.' + layer.name]
-				layer.hotspot = (hs['x'] - sl['x'], hs['y'] - sl['y'])
-			except KeyError:
-				warn("{} has no hotspot defined, defaulting to (0, 0)".format(layer.name))
-				layer.hotspot(0,0)
-			
-			if layer.hotspot[0] < 0 or layer.hotspot[0] < 0 or layer.hotspot[0] > layer.slice[2] or layer.hotspot[1] > layer.slice[3]:
-				warn("Hotspot for {name} is out of slice by ({x:.2f}, {y:.2f}), defaulting to (0,0)".format(
-					name=layer.name, x=layer.hotspot[0], y=layer.hotspot[1]))
-				layer.hotspot = (0,0)
+	def renderSVG(self, output, size):
+		scale = size / svgLayerHandler.size
+		# reset input filestream
+		self.file.seek(0)
+		p = subprocess.run(
+			[
+				rsvg_convert_path,
+				'--zoom={}'.format(scale),
+				'--format=png'
+			], stdout=subprocess.PIPE, stdin=self.file)
+		if p.returncode == 0:
+			with open(output, 'wb') as f:
+				f.write(p.stdout)
 
 def generateXCursor(pngs_directory, hotspots_directory):
 	"""
@@ -669,16 +568,17 @@ if __name__ == '__main__':
 	os.makedirs(hotspots_directory, exist_ok=True)
 
 	# setup handle to inkscape shell
-	with Inkscape(svgLayerHandler) as inkscape:
-		# render pngs of of cursors
-		for size in sizes:
-			info("Generating PNGs for size: {}".format(size))
-			output = '{opath}/{size}.png'.format(size=size, opath=pngs_directory)
-			inkscape.renderSVG(svgLayerHandler, size, output)
-			with PIL.Image.open(output, 'r') as img:
-				# loop through each slice rectangle, crop the corresponding pngs
-				for rect in svgLayerHandler.svg_rects:
-						rect.cropFromTemplate(img, size, pngs_directory)
+	#with Inkscape(svgLayerHandler) as inkscape:
+	# render pngs of of cursors
+	for size in sizes:
+		info("Generating PNGs for size: {}".format(size))
+		output = '{opath}/{size}.png'.format(size=size, opath=pngs_directory)
+		#inkscape.renderSVG(svgLayerHandler, size, output)
+		svgLayerHandler.renderSVG(output, size)
+		with PIL.Image.open(output, 'r') as img:
+			# loop through each slice rectangle, crop the corresponding pngs
+			for rect in svgLayerHandler.svg_rects:
+					rect.cropFromTemplate(img, size, pngs_directory)
 
 	info("Converting {} cursor files".format(len(svgLayerHandler.svg_rects)))
 	# loop through each slice rectangle and write corresponding X11 cursors
