@@ -60,7 +60,7 @@ animated_preview_format = { 'ffmpeg_format': 'apng', 'suffix': 'apng'}
 from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
 from xml.sax.handler import feature_namespaces
 import os, sys, stat, shutil
-import subprocess, fcntl, gzip, re
+import subprocess, gzip, re
 import PIL.Image
 from tempfile import TemporaryFile
 
@@ -261,14 +261,15 @@ class SVGLayerHandler(SVGHandler):
 		self.svgFilename = svgFilename
 		# read by inkscape
 		self.size = None
-		self.file = TemporaryFile(mode='w+', encoding='utf8')
+		self.file = TemporaryFile(mode='w+b')
 
 		# named slices bounding box will be added later by inkscape
-		self.svg_rects = []
+		self.svg_rects = {}
 		self.slices_hidden = False
 		self.hotspots_hidden = False
 
 		self._layer_nests = 0
+		self._layer_hotspots = 0
 		self._translate = (0,0)
 		self._name = None
 		self._re_translate = re.compile(r'translate\((-?[0-9]+(?:\.[0-9]+)?)[, ](-?[0-9]+(?:\.[0-9]+)?)\)')
@@ -327,10 +328,13 @@ class SVGLayerHandler(SVGHandler):
 	def _inSlicesLayer(self):
 		return (self._layer_nests >= 1)
 
+	def _inHotspotsLayer(self):
+		return (self._layer_hotspots) >= 1
+
 	def _add(self, rect):
 		"""Adds the given rect to the list of rectangles successfully parsed"""
 
-		self.svg_rects.append(rect)
+		self.svg_rects[rect.name] = rect
 
 	def _startElement_layer(self, name, attrs):
 		"""
@@ -348,6 +352,8 @@ class SVGLayerHandler(SVGHandler):
 		if attrs.get('inkscape:groupmode', None) == 'layer':
 			if self._inSlicesLayer() or attrs['inkscape:label'] == 'slices':
 				self._layer_nests += 1
+			elif self._inHotspotsLayer() or attrs['inkscape:label'] == 'hotspots':
+				self._layer_hotspots += 1
 
 			if attrs['inkscape:label'] == 'slices':
 				self.slices_hidden = self._isHidden(attrs)
@@ -360,6 +366,13 @@ class SVGLayerHandler(SVGHandler):
 					dbg(e)
 			elif attrs['inkscape:label'] == 'hotspots':
 				self.hotspots_hidden = self._isHidden(attrs)
+				try:
+					m = self._re_translate.match(attrs['transform'])
+					self._translate = (float(m.group(1)), float(m.group(2)))
+					dbg(self._translate)
+				except (AttributeError, KeyError) as e:
+					self._translate = (0,0)
+					dbg(e)
 
 	def _endElement_layer(self, name):
 		"""
@@ -371,16 +384,23 @@ class SVGLayerHandler(SVGHandler):
 		dbg("leaving layer: name='{}'".format(name))
 		if self._inSlicesLayer():
 			self._layer_nests -= 1
-			for i in self.svg_rects:
+			for i in self.svg_rects.values():
 				i.slice = (
 					(i.slice[0] + self._translate[0]) * 3.7795,
-					((i.slice[1] + self._translate[1])) * 3.7795,
+					(i.slice[1] + self._translate[1]) * 3.7795,
 					i.slice[2] * 3.7795,
 					i.slice[3] * 3.7795)
 				if self.size is None:
 					self.size = round(i.slice[2])
-				dbg("{} ({}, {}, {}, {}) ({}, {})".format(i.name, i.slice[0], i.slice[1], i.slice[2], i.slice[3], self._translate[0], self._translate[1]))
-
+				dbg("{0} ({1[0]}, {1[1]}, {1[2]}, {1[3]}) ({2[0]}, {1[1]})".format(i.name, i.slice, self._translate))
+		if self._inHotspotsLayer():
+			self._layer_hotspots -= 1
+			for i in self.svg_rects.values():
+				dbg("hotspot {0} ({1[0]}, {1[1]})".format(i.name, i.hotspot))
+				i.hotspot = (
+					(i.hotspot[0] + self._translate[0] - 0.1) * 3.7795 - i.slice[0] ,
+					(i.hotspot[1] + self._translate[1] - 0.1) * 3.7795 - i.slice[1])
+				dbg("hotspot {0} ({1[0]}, {1[1]}) ({2[0]}, {2[1]})".format(i.name, i.hotspot, self._translate ))
 
 	def _startElement_rect(self, name, attrs):
 		"""
@@ -404,6 +424,23 @@ class SVGLayerHandler(SVGHandler):
 				float(attrs['height']))
 			self._add(rect)
 
+	def _startElement_circle(self, name, attrs):
+		if self._inHotspotsLayer():
+			try:
+				name = attrs['inkscape:label']
+			except KeyError:
+				name = attrs['id']
+
+			if name.startswith('hotspot.'):
+				try:
+					rect = self.svg_rects[name[8:]]
+					rect.hotspot = (
+						float(attrs['cx']),
+						float(attrs['cy']))
+				except KeyError:
+					warn("Hotspot '{}' has not corresponding slice".format(name))
+					pass
+
 	def startElement(self, name, attrs):
 		"""Generic hook for examining and/or parsing all SVG tags"""
 
@@ -416,8 +453,10 @@ class SVGLayerHandler(SVGHandler):
 		elif name == 'g':
 			# inkscape layers are groups, I guess, hence 'g'
 			self._startElement_layer(name, attrs)
-		elif name in 'rect':
+		elif name == 'rect':
 			self._startElement_rect(name, attrs)
+		elif name == 'circle':
+			self._startElement_circle(name, attrs)
 
 	def endElement(self, name):
 		"""Generic hook called when the parser is leaving each SVG tag"""
@@ -427,22 +466,23 @@ class SVGLayerHandler(SVGHandler):
 			self._endElement_layer(name)
 		elif name == 'title':
 			self.endElement_title(name)
-		elif name == 'svg':
-			self.svg_rects.sort(key=lambda x: x.name)
 
 	def renderSVG(self, output, size):
 		scale = size / svgLayerHandler.size
 		# reset input filestream
 		self.file.seek(0)
+		
 		p = subprocess.run(
 			[
 				rsvg_convert_path,
 				'--zoom={}'.format(scale),
-				'--format=png'
-			], stdout=subprocess.PIPE, stdin=self.file)
+				'--format=png',
+			], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=self.file)
 		if p.returncode == 0:
 			with open(output, 'wb') as f:
 				f.write(p.stdout)
+		else:
+			dbg("rsvg-convert: {}".format(p.stderr.decode('utf8')))
 
 def generateXCursor(pngs_directory, hotspots_directory):
 	"""
@@ -506,19 +546,22 @@ def is_animated_cursor(hotspots_directory, name):
 		return False
 
 def make_animated_cursor_apng(pngs_directory, size, name):
-	p = subprocess.run([
-		ffmpeg_path,
-		'-i', '{src_dir}/{size}/{name}_%04d.png'.format(src_dir=pngs_directory, size=size, name=name),
-		'-plays', '0', # loop indefinetly
-		'-r', '{:.2f}'.format(fps),
-		'-f', animated_preview_format['ffmpeg_format'],
-		'-y', # always overwrite output file
-		'{dest_dir}/{name}_{size}.{ext}'.format(
-			dest_dir=pngs_directory, size=size, name=name, ext=animated_preview_format['suffix'])
-	], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf8')
+	try:
+		p = subprocess.run([
+			ffmpeg_path,
+			'-i', '{src_dir}/{size}/{name}_%04d.png'.format(src_dir=pngs_directory, size=size, name=name),
+			'-plays', '0', # loop indefinetly
+			'-r', '{:.2f}'.format(fps),
+			'-f', animated_preview_format['ffmpeg_format'],
+			'-y', # always overwrite output file
+			'{dest_dir}/{name}_{size}.{ext}'.format(
+				dest_dir=pngs_directory, size=size, name=name, ext=animated_preview_format['suffix'])
+		], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf8')
 
-	if p.returncode != 0 or options.debug:	
-		print(p.stdout)
+		if p.returncode != 0 or options.debug:	
+			print(p.stdout)
+	except FileNotFoundError:
+		warn("ffmpeg not found. Cannot generate animated preview image")
 
 class SVGFilter(saxutils.XMLFilterBase):
 	def __init__(self, upstream, downstream, mode, **kwargs):
@@ -673,12 +716,12 @@ if __name__ == '__main__':
 		svgLayerHandler.renderSVG(output, size)
 		with PIL.Image.open(output, 'r') as img:
 			# loop through each slice rectangle, crop the corresponding pngs
-			for rect in svgLayerHandler.svg_rects:
+			for rect in svgLayerHandler.svg_rects.values():
 					rect.cropFromTemplate(img, size, pngs_directory)
 
 	info("Converting {} cursor files".format(len(svgLayerHandler.svg_rects)))
 	# loop through each slice rectangle and write corresponding X11 cursors
-	for rect in svgLayerHandler.svg_rects:
+	for rect in sorted(svgLayerHandler.svg_rects.values(), key=lambda x: x.name):
 		rect.writeCursorConfig(pngs_directory, hotspots_directory)
 	
 	if options.anicur:
@@ -694,7 +737,7 @@ if __name__ == '__main__':
 
 	if options.test:
 		# make an animation preview
-		for rect in svgLayerHandler.svg_rects:
+		for rect in svgLayerHandler.svg_rects.values():
 			(name, frame) = rect.get_animated_cursor_name()
 			if frame == 1: # only generate for once per frameset
 				info("Generating animated preview for: '{}'".format(name))
