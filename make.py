@@ -10,14 +10,16 @@
 usageMsg = """You need to add a layer called "slices", and draw rectangles on it to represent the areas that should be saved as slices.  It helps when drawing these rectangles if you make them translucent.
 
 The names (inkscape id) will be reflected in the slice filenames.
-
-Please remember to HIDE the slices layer before exporting, so that the rectangles themselves are not drawn in the final image slices."""
+"""
 
 # Inkscape provides dimensions for the slice boxes. All slices need to be of the same size.
 # Inkscape is renders once each size and with PIL/Pillow's crop we cut the correct cursor
 # Mark cursor hotspot with a dot (x,y position counts; not the center), and name it "id", with a 'hotspot.' prefix
 # xcursorgen is provided with the scaled and cropped pngs for each cursor and the corresponding hotspot information
 # names.txt (real name is the first in each line, link names come after that, spaces seperated) generates symlinks for the theme
+
+# Layers: hotspots (should be top), slices (name for cursor slices)
+# shadow filter must be named "drop_shadow" (id) and all cursors having a shadow must be grouped labeld "shadow" (inkscape:label)
 
 import argparse
 
@@ -425,6 +427,13 @@ class SVGLayerHandler(SVGHandler):
 			self._add(rect)
 
 	def _startElement_circle(self, name, attrs):
+		"""
+		Callback for parsing an SVG circle
+
+		Checks if we're currently in a special "hotspots" layer using flags set by startElement_layer().
+		If we are, the current circle is considered to be a hotspot, and is added to the list.
+		"""
+
 		if self._inHotspotsLayer():
 			try:
 				name = attrs['inkscape:label']
