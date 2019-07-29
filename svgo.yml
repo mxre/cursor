@@ -24,13 +24,20 @@ plugins:
   - removeAttrsBySelector:
        - selector: g[inkscape:label=slices] rect
          attributes:
-           stroke
-           stroke-(width|dasharray|dasharray|miterlimit|opacity)
-         
+           - stroke
+           - stroke-(width|dasharray|dasharray|miterlimit|opacity)
+  - removeElementsByAttr:
+      id:
+        - base
+        - layer1
   - removeAttrs:
       attrs:
         - use:stroke.*
         - use:(width|height):100%
+        - use:inkscape.tiled-clone-of
+        - g:inkscape.tile-(cx|cy|w|h|x0|y0)
+        - path:inkscape.connector-curvature
+        - path:sodipodi.nodetypes
   - removeComments: true
   - removeDesc: true
   - removeDimensions: false
