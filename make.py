@@ -60,11 +60,10 @@ ffmpeg_path = 'ffmpeg'
 animated_preview_format = { 'ffmpeg_format': 'apng', 'suffix': 'apng'}
 
 from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
-from xml.sax.handler import feature_namespaces
-import os, sys, stat, shutil
+from xml.sax.xmlreader import InputSource
+import os, sys, io, stat, shutil
 import subprocess, gzip, re
 import PIL.Image
-from tempfile import TemporaryFile
 
 if __name__ == '__main__':
 	# parse command line into arguments and options
@@ -263,7 +262,7 @@ class SVGLayerHandler(SVGHandler):
 		self.svgFilename = svgFilename
 		# read by inkscape
 		self.size = None
-		self.file = TemporaryFile(mode='w+')
+		self.document = io.BytesIO()
 
 		# named slices bounding box will be added later by inkscape
 		self.svg_rects = {}
@@ -276,8 +275,7 @@ class SVGLayerHandler(SVGHandler):
 		self._name = None
 		self._re_translate = re.compile(r'translate\((-?[0-9]+(?:\.[0-9]+)?)[, ](-?[0-9]+(?:\.[0-9]+)?)\)')
 		# run parser
-		self._filter_svg(self._openFile(), self.file)
-		self.file.seek(0)
+		self._filter_svg(self._openFile())
 		self._runParser()
 		
 	def _openFile(self):
@@ -290,9 +288,8 @@ class SVGLayerHandler(SVGHandler):
 		else:
 			fatalError("Unknown file extension: {}".format(suffix))
 
-	def _filter_svg(self, input, output):
-		file = os.fdopen(output.fileno(), 'wb', closefd=False)
-		output_gen = saxutils.XMLGenerator(file, encoding='utf8')
+	def _filter_svg(self, input):
+		output_gen = saxutils.XMLGenerator(self.document, encoding='utf8')
 		parser = make_parser()
 		mode = ""
 		if options.shadow:
@@ -304,17 +301,17 @@ class SVGLayerHandler(SVGHandler):
 		del filter
 		del parser
 		del output_gen
-		file.close()
 
 	def _runParser(self):
 		xmlParser = make_parser()
-		xmlParser.setFeature(feature_namespaces, 0)
+		xmlParser.setFeature(handler.feature_namespaces, False)
 
 		# setup XML Parser with an SVGLayerHandler class as a callback parser ####
 		xmlParser.setContentHandler(self)
-
 		try:
-			xmlParser.parse(os.fdopen(self.file.fileno(), 'rb', closefd=False))
+			# xmlParser always closes the input so work on a copy
+			input = io.BytesIO(self.document.getvalue())
+			xmlParser.parse(input)
 		except SAXParseException as e:
 			fatalError("Error parsing SVG file '{}': {},{}: {}".format(
 				self.svgFilename, e.getLineNumber(), e.getColumnNumber(), e.getMessage()))
@@ -480,20 +477,17 @@ class SVGLayerHandler(SVGHandler):
 
 	def renderSVG(self, output, size):
 		scale = size / svgLayerHandler.size
-		# reset input filestream
-		self.file.seek(0)
-		
 		p = subprocess.run(
 			[
 				rsvg_convert_path,
 				'--zoom={}'.format(scale),
 				'--format=png',
-			], stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=self.file)
+			], stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=self.document.getvalue())
 		if p.returncode == 0:
 			with open(output, 'wb') as f:
 				f.write(p.stdout)
 		else:
-			dbg("rsvg-convert: {}".format(p.stderr.decode('utf8')))
+			warn("rsvg-convert: {}".format(p.stderr.decode('utf8')))
 
 def generateXCursor(pngs_directory, hotspots_directory):
 	"""
