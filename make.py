@@ -302,6 +302,10 @@ class SVGLayerHandler(SVGHandler):
 		del parser
 		del output_gen
 
+		if options.test:
+			with open('{}/output.svg'.format(pngs_directory), 'wb') as f:
+				f.write(self.document.getvalue())
+
 	def _runParser(self):
 		xmlParser = make_parser()
 		xmlParser.setFeature(handler.feature_namespaces, False)
@@ -348,7 +352,7 @@ class SVGLayerHandler(SVGHandler):
 		try:
 			dbg("found layer: name='{}'".format(attrs['inkscape:label']))
 		except KeyError:
-			dbg("found layer: name='{}'".format(attrs['id']))
+			dbg("found layer: name='{}'".format(name))
 
 		if attrs.get('inkscape:groupmode', None) == 'layer':
 			if self._inSlicesLayer() or attrs['inkscape:label'] == 'slices':
@@ -573,6 +577,7 @@ class SVGFilter(saxutils.XMLFilterBase):
 		saxutils.XMLFilterBase.__init__(self, upstream)
 		self._downstream = downstream
 		self.mode = mode
+		self._dropshadow_id = None
 
 	def startDocument(self):
 		self.in_throwaway_layer_stack = [False]
@@ -590,7 +595,7 @@ class SVGFilter(saxutils.XMLFilterBase):
 				new_styles.append(new_style)
 			return ';'.join(new_styles)
 
-		dict = {}
+		new_attrs = {}
 		is_throwaway_layer = False
 		is_slices = False
 		is_hotspots = False
@@ -605,17 +610,23 @@ class SVGFilter(saxutils.XMLFilterBase):
 						is_hotspots = True
 					elif value == 'shadow':
 						is_shadows = True
+						if 'shadows,' in self.mode and not self._dropshadow_id:
+							warn("Could not enable drop shadow, 'Drop Shadow' filter does not exist in SVG")
 				elif key == 'inkscape:groupmode':
 					if value == 'layer':
 						is_layer = True
+		if localname == 'filter':
+			try:
+				if attrs['inkscape:label'] == 'Drop Shadow':
+					self._dropshadow_id = attrs['id']
+			except KeyError:
+				pass
 		idict = {}
 		idict.update(attrs)
 		if 'style' not in attrs.keys():
 			idict['style'] = ''
 		for key, value in idict.items():
 			alocalname = key
-			if alocalname == 'style':
-				had_style = True
 			if alocalname == 'style' and is_slices:
 				value = modify_style(value, 'display', 'display:none')
 			if alocalname == 'style' and is_hotspots:
@@ -623,19 +634,26 @@ class SVGFilter(saxutils.XMLFilterBase):
 					value = modify_style(value, 'display', 'display:inline')
 				else:
 					value = modify_style(value, 'display', 'display:none')
-			if alocalname == 'style' and is_shadows:
-				if 'shadows,' in self.mode:
-					value = modify_style(value, 'filter', 'filter:url(#drop_shadow)')
+			if is_shadows and alocalname == 'filter':
+				if 'shadows,' in self.mode and self._dropshadow_id:
+					value = 'url(#{})'.format(self._dropshadow_id)
+				else:
+					value = ''
+			elif is_shadows and alocalname == 'style':
+				if 'shadows,' in self.mode and self._dropshadow_id:
+					value = modify_style(value, 'filter', 'filter:url(#{})'.format(self._dropshadow_id))
 				else:
 					value = modify_style(value, 'filter', None)
+				
 			value = modify_style(value, 'shape-rendering', None)
-			dict[key] = value
+			if value != '':
+				new_attrs[key] = value
 
 		if self.in_throwaway_layer_stack[0] or is_throwaway_layer:
 			self.in_throwaway_layer_stack.insert(0, True)
 		else:
 			self.in_throwaway_layer_stack.insert(0, False)
-			attrs = xmlreader.AttributesImpl(dict)
+			attrs = xmlreader.AttributesImpl(new_attrs)
 			self._downstream.startElement(localname, attrs)
 
 	def characters(self, content):

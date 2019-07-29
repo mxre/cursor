@@ -7,7 +7,6 @@ plugins:
   - addClassesToSVGElement: false
   - cleanupAttrs: true
   - cleanupEnableBackground: true
-  - cleanupIDs: false
   - cleanupListOfValues: true
   - cleanupNumericValues:
       floatPrecision: 2
@@ -19,11 +18,21 @@ plugins:
   - convertTransform: true
   - mergePaths: true
   - minifyStyles: true
+  - inlineStyles: true
   - moveElemsAttrsToGroup: true
   - moveGroupAttrsToElems: true
-  - removeAttrs: true
+  - removeAttrsBySelector:
+       - selector: g[inkscape:label=slices] rect
+         attributes:
+           stroke
+           stroke-(width|dasharray|dasharray|miterlimit|opacity)
+         
+  - removeAttrs:
+      attrs:
+        - use:stroke.*
+        - use:(width|height):100%
   - removeComments: true
-  - removeDesc: false
+  - removeDesc: true
   - removeDimensions: false
   - removeDoctype: false
   - removeEditorsNSData: false
@@ -34,6 +43,7 @@ plugins:
   - removeHiddenElems: false
   - removeMetadata: true
   - removeNonInheritableGroupAttrs: true
+  - removeOffCanvasPaths: true
   - removeRasterImages: true
   - removeStyleElement: false
   - removeTitle: false
@@ -44,5 +54,6 @@ plugins:
   - removeViewBox: true
   - removeXMLNS: false
   - removeXMLProcInst: true
+  - reusePaths: true
   - sortAttrs: true
   - transformsWithOnePath: true
