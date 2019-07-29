@@ -1,7 +1,6 @@
 # cursor name alias database
-
 # format: filename link1 link2 etc.
-# pointer
+
 left_ptr default 08ffe1e65f80fcfdf9fff11263e74c48
 center_ptr
 right_ptr arrow
@@ -12,7 +11,6 @@ pointer-move fcf21c00b30f7e3f83fe0dfd12e71cff
 help question_arrow whats_this gumby 5c6cd98b3f3ebcb1f9c7f1c204630408 d9ce0ab605698f320427677b458ad60b
 circle no-drop
 
-# hands
 hand pointer pointing_hand hand2 e29285e634086352946a0e7090d73106
 openhand grab hand1 5aca4d189052212118709018842178c0 9d800788f1b08800ae810202380a0822 
 closedhand grabbing dnd-none 208530c400c041818281048008011002
@@ -31,7 +29,8 @@ cell plus
 x-cursor X_cursor wayland-cursor pirate kill
 not-allowed crossed_circle forbidden 03b6e0fcb3499374a867c041f52298f0
 
-pencil draft
+pencil
+draft
 color-picker
 zoom-in zoom_in f41c0e382c94c0958e07017e42b00462
 zoom-out zoom_out f41c0e382c97c0938e07017e42800402
@@ -39,7 +38,7 @@ dot
 size_all
 all-scroll
 # map to closed hand
-closedhand fleur 4498f0e0c1937ffe01fd06f973665830
+size_all fleur 4498f0e0c1937ffe01fd06f973665830
 size_all move 9081237383d90e509aa00f00170e968f
 
 sb_up_arrow up-arrow up_arrow
@@ -51,7 +50,6 @@ sb_h_double_arrow ew-resize size_hor size-hor h_double_arrow 028006030e0e7ebffc7
 fd_double_arrow nesw-resize size_bdiag size-bdiag 50585d75b494802d0151028115016902 fcf1c3c7cd4491d801f1e1c78f100000
 bd_double_arrow nwse-resize size_fdiag size-fdiag 38c5dff7c7b8962045400281044508d2 c7088f0f3e6c8088236ef8e1e3e70000
 
-# gtk
 top_side n-resize
 right_side e-resize
 bottom_side s-resize
@@ -73,6 +71,5 @@ ul_angle
 col-resize 043a9f68147c53184671403ffa811cc5 14fef782d02440884392942c11205230
 row-resize 2870a09082c103050810ffdffffe0204 c07385c7190e701020ff7ffffd08103c
 
-# map waiting pointer and busy indicator together
 left_ptr_watch progress half-busy 00000000000000020006000e7e9ffc3f 08e8e1c95fe2fc01f976f1e063a24ccd 3ecb610c1bf2410f44200f48c40d3599 9116a3ea924ed2162ecab71ba103b17f
-left_ptr_watch wait watch clock 0426c94ea35c87780ff01dc239897213
+watch wait clock 0426c94ea35c87780ff01dc239897213

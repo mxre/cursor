@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" enable-background="new" viewBox="0 0 79.37 79.37" inkscape:label="slices" inkscape:version="0.92.4 5da689c313, 2019-01-14" sodipodi:docname="theme_inkscape.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="328" enable-background="new" viewBox="0 0 79.37 86.78" inkscape:label="slices" inkscape:version="0.92.4 5da689c313, 2019-01-14" sodipodi:docname="theme_inkscape.svg">
  <defs/>
  <defs>
   <filter id="a" color-interpolation-filters="sRGB" inkscape:label="Drop Shadow">
@@ -15,56 +15,104 @@
  <title>
   Theme
  </title>
- <sodipodi:namedview bordercolor="#666666" borderlayer="true" borderopacity="1" fit-margin-bottom="10" fit-margin-left="10" fit-margin-right="10" fit-margin-top="10" pagecolor="#ffffff" scale-x=".26" showgrid="true" showguides="false" units="px" inkscape:bbox-nodes="true" inkscape:bbox-paths="false" inkscape:current-layer="layer2" inkscape:cx="156.72" inkscape:cy="140.09" inkscape:document-units="px" inkscape:pagecheckerboard="true" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:showpageshadow="false" inkscape:snap-bbox="false" inkscape:snap-bbox-edge-midpoints="true" inkscape:snap-bbox-midpoints="false" inkscape:snap-center="false" inkscape:snap-grids="true" inkscape:snap-nodes="true" inkscape:snap-object-midpoints="true" inkscape:snap-others="false" inkscape:snap-smooth-nodes="true" inkscape:snap-to-guides="false" inkscape:window-height="844" inkscape:window-maximized="1" inkscape:window-width="1440" inkscape:window-x="0" inkscape:window-y="28" inkscape:zoom="2">
+ <sodipodi:namedview bordercolor="#666666" borderlayer="true" borderopacity="1" fit-margin-bottom="10" fit-margin-left="10" fit-margin-right="10" fit-margin-top="10" pagecolor="#ffffff" scale-x=".26" showgrid="true" showguides="false" units="px" inkscape:bbox-nodes="true" inkscape:bbox-paths="false" inkscape:current-layer="slices" inkscape:cx="136.51" inkscape:cy="172.5" inkscape:document-units="px" inkscape:pagecheckerboard="true" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:showpageshadow="false" inkscape:snap-bbox="true" inkscape:snap-bbox-edge-midpoints="true" inkscape:snap-bbox-midpoints="false" inkscape:snap-center="false" inkscape:snap-grids="true" inkscape:snap-nodes="false" inkscape:snap-object-midpoints="true" inkscape:snap-others="true" inkscape:snap-smooth-nodes="true" inkscape:snap-to-guides="false" inkscape:window-height="844" inkscape:window-maximized="1" inkscape:window-width="1440" inkscape:window-x="0" inkscape:window-y="28" inkscape:zoom="2">
   <inkscape:grid empcolor="#ff0000" empopacity=".29" empspacing="4" originx="0" originy="0" spacingx=".07" spacingy=".07" type="xygrid"/>
  </sodipodi:namedview>
- <g display="none" transform="translate(0 -52.916)" inkscape:groupmode="layer" inkscape:label="unused">
-  <path stroke="#000" stroke-linejoin="round" stroke-width=".26" d="M25.533 150.546l.397-.529.397.53z"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M37.307 151.075v-.793l-1.059-1.059 1.059-1.058v-.794H34.66v.794l1.058 1.058-1.058 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M37.704 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M2.911 136.788v.794l1.059 1.058-1.059 1.058v.794h2.646v-.794L4.5 138.64l1.058-1.058v-.794z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M4.234 139.17l.794.793H3.441z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M2.514 136.524h3.44m-3.44 4.233h3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M14.598 136.375l-.397.687.387 1.446-1.445.387-.397.688 2.291 1.323.397-.688-.387-1.446 1.445-.387.397-.687z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M14.553 139.098l.29 1.085-1.374-.794z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M14.386 135.947l2.98 1.72m-5.096 1.946l2.979 1.72"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M26.343 136.568l-.687.397-.388 1.446-1.445-.387-.688.397 1.323 2.29.688-.396.387-1.446 1.446.388.687-.397z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M24.942 138.905l-.29 1.084-.794-1.375z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M26.374 136.092l1.72 2.98m-5.386-.862l1.72 2.978"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M37.836 137.317h-.794l-1.058 1.059-1.058-1.059h-.794v2.646h.794l1.058-1.058 1.058 1.058h.794z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M35.455 138.64l-.794.794v-1.588z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M38.1 136.92v3.44m-4.233-3.44v3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M48.832 138.42l-.687-.396-1.446.387-.387-1.446-.687-.397-1.323 2.292.687.397 1.446-.388.387 1.446.688.397z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M46.109 138.376l-1.084.29.793-1.375z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M49.26 138.21l-1.72 2.978m-1.946-5.096l-1.72 2.98"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M59.222 139.583l-.397-.688-1.446-.387.388-1.446-.397-.687-2.291 1.323.396.687 1.446.387-.387 1.446.397.688z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M56.886 138.182l-1.085-.29 1.375-.794z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M59.698 139.613l-2.979 1.72m.862-5.386l-2.978 1.72"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M69.056 140.492v-.794l-1.058-1.058 1.058-1.058v-.794h-2.645v.794l1.058 1.058-1.058 1.058v.794z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M67.733 138.111l-.793-.794h1.587z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M69.453 140.757h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M79.64 140.492v-.794l-1.059-1.058 1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.058v.794z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M80.036 140.757h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M5.557 151.075v-.793L4.5 149.223l1.058-1.058v-.794H2.911v.794l1.059 1.058-1.059 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M5.954 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M16.14 151.075v-.793l-1.058-1.059 1.058-1.058v-.794h-2.645v.794l1.058 1.058-1.058 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M16.537 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M26.724 151.075v-.793l-1.059-1.059 1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M27.12 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M47.89 151.075v-.793l-1.058-1.059 1.058-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M48.287 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M58.473 151.075v-.793l-1.058-1.059 1.058-1.058v-.794h-2.646v.794l1.059 1.058-1.059 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M58.87 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M69.056 151.075v-.793l-1.058-1.059 1.058-1.058v-.794h-2.645v.794l1.058 1.058-1.058 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M69.453 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path fill="#fff" stroke="#000" stroke-width=".26" d="M79.64 151.075v-.793l-1.059-1.059 1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.059v.793z"/>
-  <path fill="#010101" stroke="#000" stroke-width=".26" d="M80.036 151.34h-3.44m3.44-4.233h-3.44"/>
-  <path stroke="#000" stroke-linejoin="round" stroke-width=".26" d="M24.872 150.546l.529-.529.529.53zm-10.452 0l.397-.397.397.397zm-10.45 0l.264-.264.265.264zm74.214-10.583h.265zm-42.729 10.583l.529-.595.529.595zm31.617 0l.661-.727.662.727zm10.518 0l.727-.793.727.793zm-21.101 0l.661-.661.662.661zm-10.517 0l.595-.661.595.661z"/>
-  <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M78.317 138.111l-.794-.794.794.133.793-.133zM4.234 148.694l-.727-.727.727.132.728-.132zm10.583 0l-.661-.661.661.132.662-.132zm10.583 0l-.595-.595.596.132.595-.132zm10.584 0l-.463-.463h.926zm10.583 0l-.397-.397h.794zm10.583 0l-.264-.264h.529zm10.583 0l-.132-.132h.265z"/>
-  <circle cx="78.32" cy="148.69" r=".13" color="#000"/>
- </g>
  <g inkscape:groupmode="layer" inkscape:label="cursors">
   <g filter="url(#a)" transform="translate(-20.404 23.167)" inkscape:label="shadow">
+   <g transform="translate(.428 -93.413)">
+    <path fill="#fff" stroke="#000" stroke-width=".26" d="M79.64 151.075v-.793l-1.059-1.059 1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.059v.793z"/>
+    <path fill="#010101" stroke="#000" stroke-width=".26" d="M80.036 151.34h-3.44m3.44-4.233h-3.44"/>
+    <path stroke="#000" stroke-linejoin="round" stroke-width=".26" d="M77.59 150.546l.727-.793.727.793z"/>
+    <circle cx="78.32" cy="148.69" r=".13" color="#000"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M72.924 57.662v-.794l-1.059-1.058 1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.058v.794z"/>
+    <path fill="#010101" d="M73.32 57.927h-3.439m3.439-4.234h-3.439"/>
+    <path stroke-linejoin="round" d="M70.94 57.133l.66-.728.662.728z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M71.6 55.28l-.132-.132h.265z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M65.78 57.662v-.794l-1.058-1.058 1.058-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.058v.794z"/>
+    <path fill="#010101" d="M66.177 57.927h-3.44m3.44-4.234h-3.44"/>
+    <path stroke-linejoin="round" d="M63.796 57.133l.661-.662.661.662z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M64.457 55.28l-.265-.264h.53z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M58.636 57.662v-.794l-1.058-1.058 1.058-1.058v-.794H55.99v.794l1.059 1.058-1.059 1.058v.794z"/>
+    <path fill="#010101" d="M59.033 57.927h-3.44m3.44-4.234h-3.44"/>
+    <path stroke-linejoin="round" d="M56.718 57.133l.595-.662.596.662z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M57.313 55.28l-.397-.396h.794z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M51.492 57.662v-.794l-1.058-1.058 1.058-1.058v-.794h-2.645v.794l1.058 1.058-1.058 1.058v.794z"/>
+    <path fill="#010101" d="M51.89 57.927h-3.44m3.44-4.234h-3.44"/>
+    <path stroke-linejoin="round" d="M49.64 57.133l.53-.595.529.595z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M50.17 55.28l-.463-.462h.926z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path stroke-linejoin="round" d="M43.158 57.133l.397-.53.397.53z"/>
+    <path fill="#fff" d="M44.349 57.662v-.794L43.29 55.81l1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.058v.794z"/>
+    <path fill="#010101" d="M44.746 57.927h-3.44m3.44-4.234h-3.44"/>
+    <path stroke-linejoin="round" d="M42.497 57.133l.529-.53.529.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M43.026 55.28l-.596-.595.596.133.595-.133z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M37.205 57.662v-.794l-1.058-1.058 1.058-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.058v.794z"/>
+    <path fill="#010101" d="M37.602 57.927h-3.44m3.44-4.234h-3.44"/>
+    <path stroke-linejoin="round" d="M35.485 57.133l.397-.397.397.397z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M35.882 55.28l-.661-.66.661.132.661-.133z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M30.061 57.662v-.794l-1.058-1.058 1.058-1.058v-.794h-2.646v.794l1.059 1.058-1.059 1.058v.794z"/>
+    <path fill="#010101" d="M30.458 57.927h-3.44m3.44-4.234h-3.44"/>
+    <path stroke-linejoin="round" d="M28.474 57.133l.264-.265.265.265z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M28.738 55.28l-.727-.727.727.132.728-.132z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M80.067 50.518v-.793l-1.058-1.059 1.058-1.058v-.794h-2.645v.794l1.058 1.058-1.058 1.059v.793z"/>
+    <path fill="#010101" d="M80.464 50.783h-3.44m3.44-4.233h-3.44"/>
+    <path stroke-linejoin="round" d="M78.612 49.99h.265z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M78.745 48.137l-.794-.794.794.133.793-.133z"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M72.924 50.518v-.793l-1.059-1.059 1.059-1.058v-.794h-2.646v.794l1.058 1.058-1.058 1.059v.793z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M71.6 48.137l-.793-.794h1.588z"/>
+    <path fill="#010101" d="M73.32 50.783h-3.439m3.439-4.233h-3.439"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#010101" d="M67.005 49.64l-2.979 1.72"/>
+    <g>
+     <path fill="#fff" d="M66.529 49.609l-.397-.688-1.446-.387.388-1.446-.397-.687-2.292 1.323.397.687 1.446.387-.387 1.446.396.688z"/>
+     <path stroke-linecap="round" stroke-linejoin="round" d="M64.192 48.208l-1.084-.29 1.375-.794z"/>
+     <path fill="#010101" d="M64.888 45.973l-2.979 1.72"/>
+    </g>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M59.579 48.447l-.688-.397-1.445.387-.388-1.446-.687-.396-1.323 2.29.687.398 1.446-.388.387 1.446.688.397z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M56.855 48.402l-1.084.29.793-1.375z"/>
+    <path fill="#010101" d="M60.006 48.235l-1.72 2.979m-1.946-5.095l-1.72 2.978"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M52.022 47.343h-.794l-1.058 1.059-1.059-1.059h-.794v2.646h.794l1.059-1.058 1.058 1.058h.794z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M49.64 48.666l-.793.794v-1.588z"/>
+    <path fill="#010101" d="M52.286 46.946v3.44m-4.233-3.44v3.44"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M43.968 46.595l-.687.396-.388 1.446-1.445-.387-.688.397 1.323 2.29.688-.396.387-1.446 1.446.388.687-.397z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M42.568 48.93l-.291 1.085-.794-1.375z"/>
+    <path fill="#010101" d="M43.999 46.119l1.72 2.978m-5.386-.862l1.72 2.979"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M35.662 46.4l-.396.688.387 1.446-1.446.387-.397.688 2.292 1.323.397-.688-.388-1.446 1.446-.387.397-.687z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M35.617 49.124l.291 1.085-1.375-.794z"/>
+    <path fill="#010101" d="M35.451 45.973l2.979 1.72m-5.096 1.947l2.98 1.72"/>
+   </g>
+   <g stroke="#000" stroke-width=".26">
+    <path fill="#fff" d="M27.415 46.814v.794l1.059 1.058-1.059 1.059v.793h2.646v-.793l-1.058-1.059 1.058-1.058v-.794z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M28.738 49.195l.794.794h-1.587z"/>
+    <path fill="#010101" d="M27.019 46.55h3.439m-3.439 4.233h3.439"/>
+   </g>
    <use transform="translate(50.006 7.144)" xlink:href="#b"/>
    <use transform="translate(42.862 7.144)" xlink:href="#b"/>
    <use transform="translate(35.719 7.144)" xlink:href="#b"/>
@@ -164,6 +212,11 @@
    <use transform="translate(35.719)" xlink:href="#c"/>
    <use transform="translate(28.575)" xlink:href="#c"/>
    <use transform="translate(21.431)" xlink:href="#c"/>
+   <g>
+    <path stroke="#fff" stroke-width=".26" d="M76.349 7.888s.529-1.852.529-2.91c1.058 0 2.646-1.588 2.646-1.588l1.587 1.588s-1.587 1.587-1.587 2.646c-1.323 0-2.91.529-2.91.529z" enable-background="new"/>
+    <path fill="none" stroke="#fff" stroke-width=".26" d="M78.862 5.64l-2.381 2.38v0"/>
+    <circle cx="78.8" cy="5.71" r=".4" fill="#fff"/>
+   </g>
    <path stroke="#fff" stroke-miterlimit="10" stroke-width=".26" d="M41.978-17.413a.28.28 0 00-.199.083l-.421.414a.28.28 0 000 .396l.727.728-.727.72a.28.28 0 000 .396l.421.414c.11.11.287.11.397 0l.72-.72.727.72c.11.11.287.11.397 0l.413-.414a.28.28 0 000-.397l-.72-.719.72-.728a.28.28 0 000-.396l-.413-.414a.28.28 0 00-.397 0l-.728.72-.719-.72a.28.28 0 00-.198-.083z" color="#000" enable-background="accumulate" overflow="visible" inkscape:label="x-cursor" style="marker:none"/>
    <use transform="matrix(-1 0 0 1 63.033 0)" xlink:href="#c"/>
    <g id="c" display="inline" inkscape:label="left_ptr">
@@ -171,23 +224,23 @@
    </g>
   </g>
  </g>
- <g transform="translate(0 26.458)" inkscape:groupmode="layer" inkscape:label="cursor_overlays">
+ <g transform="translate(0 33.866)" inkscape:groupmode="layer" inkscape:label="cursor_overlays">
   <g fill="#fff" stroke="#000" stroke-width=".26">
-   <path d="M31.089-18.654v.794h.793c.133 0 .133 0 .133.132-.265.265-.662.53-.662.794v1.058c0 .133 0 .133.132.133h.53c.132 0 .132 0 .132-.133v-.926c0-.264.794-.397.794-1.058 0-.662-.397-.794-1.059-.794zm.264 2.381h.794"/>
+   <path d="M31.089-26.062v.794h.793c.133 0 .133 0 .133.132-.265.264-.662.53-.662.794v1.058c0 .132 0 .132.132.132h.53c.132 0 .132 0 .132-.132v-.926c0-.265.794-.397.794-1.058 0-.662-.397-.794-1.059-.794zm.264 2.382h.794"/>
   </g>
-  <rect style="marker:none" width="1.85" height="1.85" x="52.26" y="-17.86" fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width=".26" color="#000" display="block" enable-background="accumulate" overflow="visible" rx=".43" ry=".43"/>
-  <g color="#000" transform="translate(-11.19 -26.532)">
+  <rect style="marker:none" width="1.85" height="1.85" x="52.26" y="-25.27" fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width=".26" color="#000" display="block" enable-background="accumulate" overflow="visible" rx=".43" ry=".43"/>
+  <g color="#000" transform="translate(-11.19 -33.94)">
    <path fill="#fff" d="M77.742 8.808a.393.393 0 00-.393.393.393.393 0 00.393.393.393.393 0 00.264-.104.393.393 0 00.265.104.393.393 0 00.265-.104.393.393 0 00.264.104.393.393 0 00.393-.393.393.393 0 00-.393-.393.393.393 0 00-.264.104.393.393 0 00-.265-.104.393.393 0 00-.265.104.393.393 0 00-.264-.104z" enable-background="accumulate" overflow="visible" style="isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1;marker:none"/>
    <circle cx="77.73" cy="9.2" r=".13" style="isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1;marker:none" enable-background="accumulate" overflow="visible"/>
    <circle style="isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1;marker:none" cx="78.26" cy="9.2" r=".13" enable-background="accumulate" overflow="visible"/>
    <circle cx="78.8" cy="9.2" r=".13" style="isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1;marker:none" enable-background="accumulate" overflow="visible"/>
   </g>
-  <path fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".26" d="M52.226-10.786v1.847h.783v-.526l.795.807.515-.55-.807-.783h.55v-.795z" color="#000" display="block" enable-background="accumulate" overflow="visible" style="marker:none"/>
+  <path fill="#fff" stroke="#000" stroke-linecap="round" stroke-width=".26" d="M52.226-18.195v1.848h.783v-.526l.795.806.515-.55-.807-.783h.55v-.795z" color="#000" display="block" enable-background="accumulate" overflow="visible" style="marker:none"/>
   <g id="r" display="inline">
-   <path stroke="#000" stroke-width=".53" d="M60.255-18.132c-.62 0-1.128.508-1.128 1.128 0 .62.508 1.128 1.128 1.128.62 0 1.128-.507 1.128-1.128 0-.62-.507-1.128-1.128-1.128zm0 .473a.65.65 0 01.359.112l-.912.892a.652.652 0 01.553-1.004zm.574.348a.646.646 0 01-.574.963.653.653 0 01-.317-.082z"/>
-   <path fill="#fff" d="M68 131.37a3.639 3.639 0 00-3.63 3.63 3.639 3.639 0 003.63 3.63 3.639 3.639 0 003.63-3.63 3.639 3.639 0 00-3.63-3.63zm0 1.532c.426 0 .815.142 1.147.36l-2.917 2.853a2.092 2.092 0 011.77-3.213zm1.836 1.114c.159.297.262.625.262.984A2.092 2.092 0 0168 137.098a2.09 2.09 0 01-1.016-.262z" transform="translate(38.81 -59.58) scale(.31538)"/>
+   <path stroke="#000" stroke-width=".53" d="M60.255-25.54c-.62 0-1.128.507-1.128 1.128 0 .62.508 1.128 1.128 1.128.62 0 1.128-.507 1.128-1.128 0-.62-.507-1.128-1.128-1.128zm0 .472a.65.65 0 01.359.113l-.912.891a.652.652 0 01.553-1.004zm.574.349a.646.646 0 01-.574.963.653.653 0 01-.317-.082z"/>
+   <path fill="#fff" d="M68 131.37a3.639 3.639 0 00-3.63 3.63 3.639 3.639 0 003.63 3.63 3.639 3.639 0 003.63-3.63 3.639 3.639 0 00-3.63-3.63zm0 1.532c.426 0 .815.142 1.147.36l-2.917 2.853a2.092 2.092 0 011.77-3.213zm1.836 1.114c.159.297.262.625.262.984A2.092 2.092 0 0168 137.098a2.09 2.09 0 01-1.016-.262z" transform="translate(38.81 -66.988) scale(.31538)"/>
   </g>
-  <g id="q" fill="none" stroke-miterlimit="10" color="#000" display="inline" transform="translate(37.016 -52.646) scale(.26458)">
+  <g id="q" fill="none" stroke-miterlimit="10" color="#000" display="inline" transform="translate(37.016 -60.055) scale(.26458)">
    <rect width="4.46" height="2.86" x="-75.79" y="-121" stroke="#000" stroke-width="3" display="block" enable-background="accumulate" overflow="visible" rx="1.5" ry="1.36" transform="scale(1 -1) rotate(45)" style="marker:none"/>
    <path stroke="#000" stroke-linecap="round" stroke-width="3" d="M33 136l2.75-3.313" display="block" enable-background="accumulate" overflow="visible" style="marker:none"/>
    <rect style="marker:none" width="4.52" height="2.96" x="-134.66" y="-34.28" stroke="#000" stroke-width="3" display="block" enable-background="accumulate" overflow="visible" rx="1.5" ry="1.36" transform="matrix(-.02423 -.9997 -.9998 .02035 0 0)"/>
@@ -195,232 +248,266 @@
    <path style="marker:none" stroke="#fff" stroke-linecap="round" d="M33.133 136l3.038-3.396" enable-background="accumulate" overflow="visible"/>
    <rect width="4.52" height="2.96" x="-134.66" y="-34.28" stroke="#fff" enable-background="accumulate" overflow="visible" rx="1.5" ry="1.36" transform="matrix(-.02423 -.9997 -.9998 .02035 0 0)" style="marker:none"/>
   </g>
-  <path style="marker:none" id="p" fill="#fff" fill-opacity="1" fill-rule="nonzero" stroke="#000" stroke-dasharray="none" stroke-dashoffset="0" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-opacity="1" stroke-width=".26" d="M38.563-18.125c-.052 0-.066.015-.066.067v.727h-.728c-.051 0-.066.015-.066.066v.662c0 .051.015.066.066.066h.728v.727c0 .052.014.067.066.067h.661c.052 0 .067-.015.067-.067v-.727h.727c.052 0 .066-.015.066-.066v-.662c0-.051-.014-.066-.066-.066h-.727v-.727c0-.052-.015-.067-.067-.067z" color="#000" display="block" enable-background="accumulate" overflow="visible" visibility="visible"/>
+  <path style="marker:none" id="p" fill="#fff" fill-opacity="1" fill-rule="nonzero" stroke="#000" stroke-dasharray="none" stroke-dashoffset="0" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-opacity="1" stroke-width=".26" d="M38.563-25.533c-.052 0-.066.014-.066.066v.728h-.728c-.051 0-.066.014-.066.066v.661c0 .052.015.067.066.067h.728v.727c0 .052.014.066.066.066h.661c.052 0 .067-.014.067-.066v-.727h.727c.052 0 .066-.015.066-.067v-.661c0-.052-.014-.066-.066-.066h-.727v-.728c0-.052-.015-.066-.067-.066z" color="#000" display="block" enable-background="accumulate" overflow="visible" visibility="visible"/>
   <g fill="#fff" stroke="#000" stroke-width=".26">
-   <path d="M31.089-11.51v.794h.793c.133 0 .133 0 .133.132-.265.265-.662.53-.662.794v1.058c0 .132 0 .132.132.132h.53c.132 0 .132 0 .132-.132v-.926c0-.265.794-.397.794-1.058 0-.662-.397-.794-1.059-.794zm.264 2.381h.794"/>
+   <path d="M31.089-18.918v.793h.793c.133 0 .133 0 .133.133-.265.264-.662.529-.662.793v1.059c0 .132 0 .132.132.132h.53c.132 0 .132 0 .132-.132v-.926c0-.265.794-.397.794-1.059 0-.661-.397-.793-1.059-.793zm.264 2.381h.794"/>
   </g>
-  <path stroke="#fff" stroke-width=".26" d="M29.104-5.954c-.132 0-.132 0-.132.132v.397h-.397c-.132 0-.132 0-.132.133v.264c0 .133 0 .133.132.133h.397v.396c0 .133 0 .133.132.133h.265c.132 0 .132 0 .132-.133v-.396h.397c.132 0 .132 0 .132-.133v-.264c0-.133 0-.133-.132-.133H29.5v-.397c0-.132 0-.132-.132-.132zm6.879.529c-.132 0-.132 0-.132.133v.264c0 .133 0 .133.132.133h1.323c.133 0 .133 0 .133-.133v-.264c0-.133 0-.133-.133-.133z"/>
+  <path stroke="#fff" stroke-width=".26" d="M29.104-13.362c-.132 0-.132 0-.132.132v.397h-.397c-.132 0-.132 0-.132.132v.265c0 .132 0 .132.132.132h.397v.397c0 .132 0 .132.132.132h.265c.132 0 .132 0 .132-.132v-.397h.397c.132 0 .132 0 .132-.132v-.265c0-.132 0-.132-.132-.132H29.5v-.397c0-.132 0-.132-.132-.132zm6.879.529c-.132 0-.132 0-.132.132v.265c0 .132 0 .132.132.132h1.323c.133 0 .133 0 .133-.132v-.265c0-.132 0-.132-.133-.132z"/>
   <use transform="translate(0 7.144)" xlink:href="#p"/>
   <use transform="translate(.026 7.123)" xlink:href="#q"/>
   <use transform="translate(0 7.144)" xlink:href="#r"/>
   <g>
-   <g transform="translate(-25.431 -84.997)">
+   <g transform="translate(-25.431 -92.406)">
     <path fill="#fff" stroke="#000" stroke-width=".26" d="M84.566 123.76v.529l.53.529-.53.529v.53h1.588v-.53l-.53-.53.53-.528v-.53z"/>
     <circle cx="85.36" cy="124.55" r=".13" color="#000"/>
     <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M84.963 125.48l.397-.398.397.397z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M51.99 38.762v.53l.53.528-.53.53v.529h1.588v-.53l-.529-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M52.718 39.49l.067.066.066-.066zm-.304.992l.37-.37.371.37z"/>
+    <path fill="#fff" d="M51.99 31.354v.529l.53.529-.53.53v.528h1.588v-.529l-.529-.53.53-.528v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M52.718 32.081l.067.066.066-.066zm-.304.992l.37-.37.371.37z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M44.847 38.762v.53l.53.528-.53.53v.529h1.588v-.53l-.53-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M45.509 39.423l.132.133.132-.133zm-.199 1.059l.33-.331.332.33z"/>
+    <path fill="#fff" d="M44.847 31.354v.529l.53.529-.53.53v.528h1.588v-.529l-.53-.529.53-.53v-.528z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M45.509 32.015l.132.132.132-.132zm-.199 1.058l.33-.33.332.33z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M37.703 38.762v.53l.53.528-.53.53v.529h1.588v-.53l-.53-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M38.299 39.357l.198.199.198-.199zm-.093 1.125l.291-.291.291.29z"/>
+    <path fill="#fff" d="M37.703 31.354v.529l.53.529-.53.53v.528h1.588v-.529l-.53-.53.53-.528v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M38.299 31.949l.198.198.198-.198zm-.093 1.124l.291-.29.291.29z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M30.56 38.762v.53l.529.528-.53.53v.529h1.588v-.53l-.53-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M31.089 39.291l.264.265.265-.265zm0 1.191l.264-.265.265.265z"/>
+    <path fill="#fff" d="M30.56 31.354v.529l.529.529-.53.53v.528h1.588v-.529l-.53-.53.53-.528v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M31.089 31.883l.264.264.265-.264zm0 1.19l.264-.264.265.264z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M23.416 38.762v.53l.529.528-.53.53v.529h1.588v-.53l-.529-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M23.919 39.265l.29.29.292-.29zm.092 1.217l.199-.199.198.199z"/>
+    <path fill="#fff" d="M23.416 31.354v.529l.529.529-.53.53v.528h1.588v-.529l-.529-.53.53-.528v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M23.919 31.856l.29.291.292-.29zm.092 1.217l.199-.198.198.198z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M16.272 38.762v.53l.53.528-.53.53v.529h1.588v-.53l-.53-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M16.735 39.225l.33.33.332-.33zm.199 1.257l.132-.133.132.133z"/>
+    <path fill="#fff" d="M16.272 31.354v.529l.53.529-.53.53v.528h1.588v-.529l-.53-.53.53-.528v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M16.735 31.817l.33.33.332-.33zm.199 1.256l.132-.132.132.132z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M9.128 38.762v.53l.53.528-.53.53v.529h1.588v-.53l-.53-.529.53-.529v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M9.552 39.185l.37.37.37-.37zm.304 1.297l.066-.066.066.066z"/>
+    <path fill="#fff" d="M9.128 31.354v.529l.53.529-.53.53v.528h1.588v-.529l-.53-.53.53-.528v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9.552 31.777l.37.37.37-.37zm.304 1.296l.066-.066.066.066z"/>
    </g>
-   <g transform="translate(-23.713 -86.04)">
+   <g transform="translate(-23.713 -93.448)">
     <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M83.244 118.055l.397.397.397-.397z"/>
     <path fill="#fff" stroke="#000" stroke-width=".26" d="M82.847 117.658v.53l.53.528-.53.53v.529h1.588v-.53l-.53-.529.53-.529v-.529z"/>
     <circle cx="83.64" cy="-119.38" r=".13" color="#000" transform="scale(1 -1)"/>
     <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".26" d="M83.27 118.081l.37.37.371-.37z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M51.99 31.618v.53l.53.529-.53.529v.529h1.588v-.53l-.529-.528.53-.53v-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M52.388 32.015l.397.397.396-.397z"/>
+    <path fill="#fff" d="M51.99 24.21v.529l.53.53-.53.528v.53h1.588v-.53l-.529-.529.53-.529v-.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M52.388 24.607l.397.397.396-.397z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M44.424 32.157l.265.458.723.194-.194.723.265.458 1.374-.794-.264-.458-.723-.194.194-.723-.265-.458z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M44.966 32.302l.542.145.146-.542z"/>
+    <path fill="#fff" d="M44.424 24.749l.265.458.723.193-.194.723.265.459 1.374-.794-.264-.458-.723-.194.194-.723-.265-.458z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M44.966 24.894l.542.145.146-.542z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M37.184 32.835l.458.264.723-.193.193.723.459.264.793-1.375-.458-.264-.723.193-.193-.722-.459-.265z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M37.726 32.69l.542-.146-.145-.542z"/>
+    <path fill="#fff" d="M37.184 25.426l.458.265.723-.194.193.723.459.265.793-1.375-.458-.265-.723.194-.193-.723-.459-.264z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M37.726 25.281l.542-.145-.145-.542z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M30.295 33.47h.53l.528-.529.53.53h.529v-1.588h-.53l-.529.529-.529-.53h-.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M30.692 33.073l.397-.396-.397-.397z"/>
+    <path fill="#fff" d="M30.295 26.062h.53l.528-.53.53.53h.529v-1.588h-.53l-.529.53-.529-.53h-.529z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M30.692 25.665l.397-.397-.397-.397z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M23.69 33.893l.458-.264.194-.723.723.193.458-.264-.794-1.375-.458.265-.194.722-.723-.193-.458.264z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M23.835 33.351l.145-.542-.542-.145z"/>
+    <path fill="#fff" d="M23.69 26.485l.458-.265.194-.723.723.194.458-.265-.794-1.374-.458.264-.194.723-.723-.194-.458.265z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M23.835 25.943l.145-.543-.542-.145z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M17.224 33.99l.265-.458-.194-.723.723-.194.264-.458-1.374-.794-.265.458.194.723-.723.194-.265.458z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M17.079 33.448l-.146-.542-.542.145z"/>
+    <path fill="#fff" d="M17.224 26.582l.265-.459-.194-.723.723-.193.264-.458-1.374-.794-.265.458.194.723-.723.194-.265.458z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M17.079 26.04l-.146-.543-.542.146z"/>
    </g>
    <g stroke="#000" stroke-width=".26">
-    <path fill="#fff" d="M10.716 33.735v-.53l-.53-.528.53-.53v-.529H9.128v.53l.53.529-.53.529v.529z"/>
-    <path stroke-linecap="round" stroke-linejoin="round" d="M10.319 33.338l-.397-.397-.397.397z"/>
+    <path fill="#fff" d="M10.716 26.327v-.53l-.53-.529.53-.529v-.53H9.128v.53l.53.53-.53.528v.53z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M10.319 25.93l-.397-.397-.397.397z"/>
    </g>
   </g>
  </g>
- <g fill="#f0f" fill-opacity=".27" display="none" transform="translate(-20.39 23.2)" inkscape:groupmode="layer" inkscape:label="slices" sodipodi:insensitive="true">
-  <rect width="6.35" height="6.35" x="25.68" y="-4.41" inkscape:label="not-allowed"/>
-  <rect width="6.35" height="6.35" x="75.69" y="-11.56" inkscape:label="dnd-no-drop"/>
-  <rect width="6.35" height="6.35" x="68.54" y="-11.56" inkscape:label="dnd-move"/>
-  <rect width="6.35" height="6.35" x="61.4" y="-11.56" inkscape:label="dnd-link"/>
-  <rect width="6.35" height="6.35" x="54.26" y="-11.56" inkscape:label="dnd-copy"/>
-  <rect width="6.35" height="6.35" x="47.11" y="-11.56" inkscape:label="dnd-ask"/>
-  <rect width="6.35" height="6.35" x="39.97" y="-11.56" inkscape:label="closedhand"/>
-  <rect width="6.35" height="6.35" x="32.82" y="-11.56" inkscape:label="openhand"/>
-  <rect width="6.35" height="6.35" x="25.68" y="-11.56" inkscape:label="hand"/>
-  <rect width="6.35" height="6.35" x="82.83" y="-18.7" inkscape:label="context-menu"/>
-  <rect width="6.35" height="6.35" x="75.69" y="-18.7" inkscape:label="circle"/>
-  <rect width="6.35" height="6.35" x="68.54" y="-18.7" inkscape:label="pointer-move"/>
-  <rect width="6.35" height="6.35" x="61.4" y="-18.7" inkscape:label="link"/>
-  <rect width="6.35" height="6.35" x="54.26" y="-18.7" inkscape:label="copy"/>
-  <rect width="6.35" height="6.35" x="47.11" y="-18.7" inkscape:label="help"/>
-  <rect width="6.35" height="6.35" x="39.97" y="-18.7" inkscape:label="x-cursor"/>
-  <rect width="6.35" height="6.35" x="32.82" y="-18.7" inkscape:label="right_ptr"/>
-  <rect width="6.35" height="6.35" x="25.68" y="-18.7" inkscape:label="left_ptr"/>
-  <rect width="6.35" height="6.35" x="32.82" y="-4.41" inkscape:label="pencil"/>
-  <rect width="6.35" height="6.35" x="39.97" y="-4.41" inkscape:label="color-picker"/>
-  <rect width="6.35" height="6.35" x="47.11" y="-4.41" inkscape:label="zoom-in"/>
-  <rect width="6.35" height="6.35" x="54.26" y="-4.41" inkscape:label="zoom-out"/>
-  <rect width="6.35" height="6.35" x="61.4" y="-4.41" inkscape:label="dot"/>
-  <rect width="6.35" height="6.35" x="68.54" y="-4.41" inkscape:label="cell"/>
-  <rect width="6.35" height="6.35" x="75.69" y="-4.41" inkscape:label="text"/>
-  <rect width="6.35" height="6.35" x="82.83" y="-4.41" inkscape:label="vertical-text"/>
-  <rect width="6.35" height="6.35" x="25.68" y="2.73" inkscape:label="crosshair"/>
-  <rect width="6.35" height="6.35" x="25.68" y="9.87" inkscape:label="sb_up_arrow"/>
-  <rect width="6.35" height="6.35" x="25.68" y="17.02" inkscape:label="top_side"/>
-  <rect width="6.35" height="6.35" x="32.82" y="2.73" inkscape:label="dotbox"/>
-  <rect width="6.35" height="6.35" x="32.82" y="17.02" inkscape:label="right_side"/>
-  <rect width="6.35" height="6.35" x="39.97" y="17.02" inkscape:label="bottom_side"/>
-  <rect width="6.35" height="6.35" x="47.11" y="17.02" inkscape:label="left_side"/>
-  <rect width="6.35" height="6.35" x="54.26" y="17.02" inkscape:label="top_right_corner"/>
-  <rect width="6.35" height="6.35" x="61.4" y="17.02" inkscape:label="bottom_right_corner"/>
-  <rect width="6.35" height="6.35" x="68.54" y="17.02" inkscape:label="bottom_left_corner"/>
-  <rect width="6.35" height="6.35" x="75.69" y="17.02" inkscape:label="top_left_corner"/>
-  <rect width="6.35" height="6.35" x="32.82" y="9.87" inkscape:label="sb_right_arrow"/>
-  <rect width="6.35" height="6.35" x="39.97" y="9.87" inkscape:label="sb_down_arrow"/>
-  <rect width="6.35" height="6.35" x="47.11" y="9.87" inkscape:label="sb_left_arrow"/>
-  <rect width="6.35" height="6.35" x="54.26" y="9.87" inkscape:label="sb_v_double_arrow"/>
-  <rect width="6.35" height="6.35" x="61.4" y="9.87" inkscape:label="sb_h_double_arrow"/>
-  <rect width="6.35" height="6.35" x="68.54" y="9.87" inkscape:label="fd_double_arrow"/>
-  <rect width="6.35" height="6.35" x="75.69" y="9.87" inkscape:label="bd_double_arrow"/>
-  <rect width="6.35" height="6.35" x="25.68" y="24.16" inkscape:label="top_tee"/>
-  <rect width="6.35" height="6.35" x="32.82" y="24.16" inkscape:label="right_tee"/>
-  <rect width="6.35" height="6.35" x="39.97" y="24.16" inkscape:label="bottom_tee"/>
-  <rect width="6.35" height="6.35" x="47.11" y="24.16" inkscape:label="left_tee"/>
-  <rect width="6.35" height="6.35" x="54.26" y="24.16" inkscape:label="ur_angle"/>
-  <rect width="6.35" height="6.35" x="61.4" y="24.16" inkscape:label="lr_angle"/>
-  <rect width="6.35" height="6.35" x="68.54" y="24.16" inkscape:label="ll_angle"/>
-  <rect width="6.35" height="6.35" x="75.69" y="24.16" inkscape:label="ul_angle"/>
-  <rect width="6.35" height="6.35" x="39.97" y="2.73" inkscape:label="cross"/>
-  <rect width="6.35" height="6.35" x="47.11" y="2.73" inkscape:label="all-scroll"/>
-  <rect width="6.35" height="6.35" x="54.26" y="2.73" inkscape:label="size_all"/>
-  <rect width="6.35" height="6.35" x="61.4" y="2.73" inkscape:label="row-resize"/>
-  <rect width="6.35" height="6.35" x="68.54" y="2.73" inkscape:label="col-resize"/>
-  <rect width="6.35" height="6.35" x="75.69" y="38.45" inkscape:label="left_ptr_watch_0016"/>
-  <rect width="6.35" height="6.35" x="68.54" y="38.45" inkscape:label="left_ptr_watch_0015"/>
-  <rect width="6.35" height="6.35" x="61.4" y="38.45" inkscape:label="left_ptr_watch_0014"/>
-  <rect width="6.35" height="6.35" x="54.26" y="38.45" inkscape:label="left_ptr_watch_0013"/>
-  <rect width="6.35" height="6.35" x="47.11" y="38.45" inkscape:label="left_ptr_watch_0012"/>
-  <rect width="6.35" height="6.35" x="39.97" y="38.45" inkscape:label="left_ptr_watch_0011"/>
-  <rect width="6.35" height="6.35" x="32.82" y="38.45" inkscape:label="left_ptr_watch_0010"/>
-  <rect width="6.35" height="6.35" x="25.68" y="38.45" inkscape:label="left_ptr_watch_0009"/>
-  <rect width="6.35" height="6.35" x="75.69" y="31.3" inkscape:label="left_ptr_watch_0008"/>
-  <rect width="6.35" height="6.35" x="68.54" y="31.3" inkscape:label="left_ptr_watch_0007"/>
-  <rect width="6.35" height="6.35" x="61.4" y="31.3" inkscape:label="left_ptr_watch_0006"/>
-  <rect width="6.35" height="6.35" x="54.26" y="31.3" inkscape:label="left_ptr_watch_0005"/>
-  <rect width="6.35" height="6.35" x="47.11" y="31.3" inkscape:label="left_ptr_watch_0004"/>
-  <rect width="6.35" height="6.35" x="39.97" y="31.3" inkscape:label="left_ptr_watch_0003"/>
-  <rect width="6.35" height="6.35" x="32.82" y="31.3" inkscape:label="left_ptr_watch_0002"/>
-  <rect width="6.35" height="6.35" x="25.68" y="31.3" inkscape:label="left_ptr_watch_0001"/>
+ <g fill="#f0f" fill-opacity=".27" display="none" transform="translate(-20.39 30.608)" inkscape:groupmode="layer" inkscape:label="slices" sodipodi:insensitive="true">
+  <rect width="6.35" height="6.35" x="75.69" y="45.33" enable-background="new" inkscape:label="watch_0016"/>
+  <rect width="6.35" height="6.35" x="68.54" y="45.33" enable-background="new" inkscape:label="watch_0015"/>
+  <rect width="6.35" height="6.35" x="61.4" y="45.33" enable-background="new" inkscape:label="watch_0014"/>
+  <rect width="6.35" height="6.35" x="54.26" y="45.33" enable-background="new" inkscape:label="watch_0013"/>
+  <rect width="6.35" height="6.35" x="47.11" y="45.33" enable-background="new" inkscape:label="watch_0012"/>
+  <rect width="6.35" height="6.35" x="39.97" y="45.33" enable-background="new" inkscape:label="watch_0011"/>
+  <rect width="6.35" height="6.35" x="32.82" y="45.33" enable-background="new" inkscape:label="watch_0010"/>
+  <rect width="6.35" height="6.35" x="25.68" y="45.33" enable-background="new" inkscape:label="watch_0009"/>
+  <rect width="6.35" height="6.35" x="75.69" y="38.18" enable-background="new" inkscape:label="watch_0008"/>
+  <rect width="6.35" height="6.35" x="68.54" y="38.18" enable-background="new" inkscape:label="watch_0007"/>
+  <rect width="6.35" height="6.35" x="61.4" y="38.18" enable-background="new" inkscape:label="watch_0006"/>
+  <rect width="6.35" height="6.35" x="54.26" y="38.18" enable-background="new" inkscape:label="watch_0005"/>
+  <rect width="6.35" height="6.35" x="47.11" y="38.18" enable-background="new" inkscape:label="watch_0004"/>
+  <rect width="6.35" height="6.35" x="39.97" y="38.18" enable-background="new" inkscape:label="watch_0003"/>
+  <rect width="6.35" height="6.35" x="32.82" y="38.18" enable-background="new" inkscape:label="watch_0002"/>
+  <rect width="6.35" height="6.35" x="25.68" y="38.18" enable-background="new" inkscape:label="watch_0001"/>
+  <rect width="6.35" height="6.35" x="75.69" y="31.04" inkscape:label="left_ptr_watch_0016"/>
+  <rect width="6.35" height="6.35" x="68.54" y="31.04" inkscape:label="left_ptr_watch_0015"/>
+  <rect width="6.35" height="6.35" x="61.4" y="31.04" inkscape:label="left_ptr_watch_0014"/>
+  <rect width="6.35" height="6.35" x="54.26" y="31.04" inkscape:label="left_ptr_watch_0013"/>
+  <rect width="6.35" height="6.35" x="47.11" y="31.04" inkscape:label="left_ptr_watch_0012"/>
+  <rect width="6.35" height="6.35" x="39.97" y="31.04" inkscape:label="left_ptr_watch_0011"/>
+  <rect width="6.35" height="6.35" x="32.82" y="31.04" inkscape:label="left_ptr_watch_0010"/>
+  <rect width="6.35" height="6.35" x="25.68" y="31.04" inkscape:label="left_ptr_watch_0009"/>
+  <rect width="6.35" height="6.35" x="75.69" y="23.9" inkscape:label="left_ptr_watch_0008"/>
+  <rect width="6.35" height="6.35" x="68.54" y="23.9" inkscape:label="left_ptr_watch_0007"/>
+  <rect width="6.35" height="6.35" x="61.4" y="23.9" inkscape:label="left_ptr_watch_0006"/>
+  <rect width="6.35" height="6.35" x="54.26" y="23.9" inkscape:label="left_ptr_watch_0005"/>
+  <rect width="6.35" height="6.35" x="47.11" y="23.9" inkscape:label="left_ptr_watch_0004"/>
+  <rect width="6.35" height="6.35" x="39.97" y="23.9" inkscape:label="left_ptr_watch_0003"/>
+  <rect width="6.35" height="6.35" x="32.82" y="23.9" inkscape:label="left_ptr_watch_0002"/>
+  <rect width="6.35" height="6.35" x="25.68" y="23.9" inkscape:label="left_ptr_watch_0001"/>
+  <rect width="6.35" height="6.35" x="25.68" y="-11.82" inkscape:label="not-allowed"/>
+  <rect width="6.35" height="6.35" x="75.69" y="-18.97" inkscape:label="dnd-no-drop"/>
+  <rect width="6.35" height="6.35" x="68.54" y="-18.97" inkscape:label="dnd-move"/>
+  <rect width="6.35" height="6.35" x="61.4" y="-18.97" inkscape:label="dnd-link"/>
+  <rect width="6.35" height="6.35" x="54.26" y="-18.97" inkscape:label="dnd-copy"/>
+  <rect width="6.35" height="6.35" x="47.11" y="-18.97" inkscape:label="dnd-ask"/>
+  <rect width="6.35" height="6.35" x="39.97" y="-18.97" inkscape:label="closedhand"/>
+  <rect width="6.35" height="6.35" x="32.82" y="-18.97" inkscape:label="openhand"/>
+  <rect width="6.35" height="6.35" x="25.68" y="-18.97" inkscape:label="hand"/>
+  <rect width="6.35" height="6.35" x="82.83" y="-26.11" inkscape:label="context-menu"/>
+  <rect width="6.35" height="6.35" x="75.69" y="-26.11" inkscape:label="circle"/>
+  <rect width="6.35" height="6.35" x="68.54" y="-26.11" inkscape:label="pointer-move"/>
+  <rect width="6.35" height="6.35" x="61.4" y="-26.11" inkscape:label="link"/>
+  <rect width="6.35" height="6.35" x="54.26" y="-26.11" inkscape:label="copy"/>
+  <rect width="6.35" height="6.35" x="47.11" y="-26.11" inkscape:label="help"/>
+  <rect width="6.35" height="6.35" x="39.97" y="-26.11" inkscape:label="x-cursor"/>
+  <rect width="6.35" height="6.35" x="32.82" y="-26.11" inkscape:label="right_ptr"/>
+  <rect width="6.35" height="6.35" x="25.68" y="-26.11" inkscape:label="left_ptr"/>
+  <rect width="6.35" height="6.35" x="32.82" y="-11.82" inkscape:label="pencil"/>
+  <rect width="6.35" height="6.35" x="39.97" y="-11.82" inkscape:label="color-picker"/>
+  <rect width="6.35" height="6.35" x="47.11" y="-11.82" inkscape:label="zoom-in"/>
+  <rect width="6.35" height="6.35" x="54.26" y="-11.82" inkscape:label="zoom-out"/>
+  <rect width="6.35" height="6.35" x="61.4" y="-11.82" inkscape:label="dot"/>
+  <rect width="6.35" height="6.35" x="68.54" y="-11.82" inkscape:label="cell"/>
+  <rect width="6.35" height="6.35" x="75.69" y="-11.82" inkscape:label="text"/>
+  <rect width="6.35" height="6.35" x="82.83" y="-11.82" inkscape:label="vertical-text"/>
+  <rect width="6.35" height="6.35" x="25.68" y="-4.68" inkscape:label="crosshair"/>
+  <rect width="6.35" height="6.35" x="25.68" y="2.46" inkscape:label="sb_up_arrow"/>
+  <rect width="6.35" height="6.35" x="25.68" y="9.61" inkscape:label="top_side"/>
+  <rect width="6.35" height="6.35" x="32.82" y="-4.68" inkscape:label="dotbox"/>
+  <rect width="6.35" height="6.35" x="32.82" y="9.61" inkscape:label="right_side"/>
+  <rect width="6.35" height="6.35" x="39.97" y="9.61" inkscape:label="bottom_side"/>
+  <rect width="6.35" height="6.35" x="47.11" y="9.61" inkscape:label="left_side"/>
+  <rect width="6.35" height="6.35" x="54.26" y="9.61" inkscape:label="top_right_corner"/>
+  <rect width="6.35" height="6.35" x="61.4" y="9.61" inkscape:label="bottom_right_corner"/>
+  <rect width="6.35" height="6.35" x="68.54" y="9.61" inkscape:label="bottom_left_corner"/>
+  <rect width="6.35" height="6.35" x="75.69" y="9.61" inkscape:label="top_left_corner"/>
+  <rect width="6.35" height="6.35" x="32.82" y="2.46" inkscape:label="sb_right_arrow"/>
+  <rect width="6.35" height="6.35" x="39.97" y="2.46" inkscape:label="sb_down_arrow"/>
+  <rect width="6.35" height="6.35" x="47.11" y="2.46" inkscape:label="sb_left_arrow"/>
+  <rect width="6.35" height="6.35" x="54.26" y="2.46" inkscape:label="sb_v_double_arrow"/>
+  <rect width="6.35" height="6.35" x="61.4" y="2.46" inkscape:label="sb_h_double_arrow"/>
+  <rect width="6.35" height="6.35" x="68.54" y="2.46" inkscape:label="fd_double_arrow"/>
+  <rect width="6.35" height="6.35" x="75.69" y="2.46" inkscape:label="bd_double_arrow"/>
+  <rect width="6.35" height="6.35" x="25.68" y="16.75" inkscape:label="top_tee"/>
+  <rect width="6.35" height="6.35" x="32.82" y="16.75" inkscape:label="right_tee"/>
+  <rect width="6.35" height="6.35" x="39.97" y="16.75" inkscape:label="bottom_tee"/>
+  <rect width="6.35" height="6.35" x="47.11" y="16.75" inkscape:label="left_tee"/>
+  <rect width="6.35" height="6.35" x="54.26" y="16.75" inkscape:label="ur_angle"/>
+  <rect width="6.35" height="6.35" x="61.4" y="16.75" inkscape:label="lr_angle"/>
+  <rect width="6.35" height="6.35" x="68.54" y="16.75" inkscape:label="ll_angle"/>
+  <rect width="6.35" height="6.35" x="75.69" y="16.75" inkscape:label="ul_angle"/>
+  <rect width="6.35" height="6.35" x="39.97" y="-4.68" inkscape:label="cross"/>
+  <rect width="6.35" height="6.35" x="47.11" y="-4.68" inkscape:label="all-scroll"/>
+  <rect width="6.35" height="6.35" x="54.26" y="-4.68" inkscape:label="size_all"/>
+  <rect width="6.35" height="6.35" x="61.4" y="-4.68" inkscape:label="row-resize"/>
+  <rect width="6.35" height="6.35" x="68.54" y="-4.68" inkscape:label="col-resize"/>
+  <rect width="6.35" height="6.35" x="75.69" y="-4.68" enable-background="new" inkscape:label="draft"/>
  </g>
- <g fill="red" display="none" transform="translate(0 32.783)" inkscape:groupmode="layer" inkscape:label="hotspots" sodipodi:insensitive="true">
-  <circle cx="8.33" cy="-10.96" r=".08" inkscape:label="hotspot.not-allowed"/>
-  <circle cx="58.34" cy="-19.42" r=".08" inkscape:label="hotspot.dnd-no-drop"/>
-  <circle cx="51.2" cy="-19.42" r=".08" inkscape:label="hotspot.dnd-move"/>
-  <circle cx="44.05" cy="-19.42" r=".08" inkscape:label="hotspot.dnd-link"/>
-  <circle cx="36.91" cy="-19.42" r=".08" inkscape:label="hotspot.dnd-copy"/>
-  <circle cx="29.77" cy="-19.42" r=".08" inkscape:label="hotspot.dnd-ask"/>
-  <circle cx="22.62" cy="-18.36" r=".08" inkscape:label="hotspot.closedhand"/>
-  <circle cx="15.48" cy="-18.36" r=".08" inkscape:label="hotspot.openhand"/>
-  <circle cx="6.75" cy="-20.48" r=".08" inkscape:label="hotspot.hand"/>
-  <circle cx="63.37" cy="-27.63" r=".08" inkscape:label="hotspot.context-menu"/>
-  <circle cx="56.22" cy="-27.63" r=".08" inkscape:label="hotspot.circle"/>
-  <circle cx="49.08" cy="-27.63" r=".08" inkscape:label="hotspot.pointer-move"/>
-  <circle cx="41.94" cy="-27.63" r=".08" inkscape:label="hotspot.link"/>
-  <circle cx="34.79" cy="-27.63" r=".08" inkscape:label="hotspot.copy"/>
-  <circle cx="27.65" cy="-27.63" r=".08" inkscape:label="hotspot.help"/>
-  <circle cx="22.49" cy="-25.38" r=".08" inkscape:label="hotspot.x-cursor"/>
-  <circle cx="16.01" cy="-27.63" r=".08" inkscape:label="hotspot.right_ptr"/>
-  <circle cx="6.22" cy="-27.63" r=".08" inkscape:label="hotspot.left_ptr"/>
-  <circle cx="51.06" cy="-11.09" r=".08" inkscape:label="hotspot.cell"/>
-  <circle cx="44.19" cy="-11.09" r=".08" inkscape:label="hotspot.dot"/>
-  <circle cx="36.64" cy="-11.49" r=".08" inkscape:label="hotspot.zoom-out"/>
-  <circle cx="29.24" cy="-11.49" r=".08" inkscape:label="hotspot.zoom-in"/>
-  <circle cx="20.51" cy="-8.58" r=".08" inkscape:label="hotspot.color-picker"/>
-  <circle cx="13.36" cy="-8.58" r=".08" inkscape:label="hotspot.pencil"/>
-  <circle cx="65.75" cy="-11.22" r=".08" inkscape:label="hotspot.vertical-text"/>
-  <circle cx="57.81" cy="-10.96" r=".08" inkscape:label="hotspot.text"/>
-  <circle cx="8.33" cy="-3.81" r=".08" inkscape:label="hotspot.crosshair"/>
-  <circle cx="8.33" cy=".95" r=".08" inkscape:label="hotspot.sb_up_arrow"/>
-  <circle cx="8.33" cy="9.14" r=".08" inkscape:label="hotspot.top_side"/>
-  <circle cx="15.48" cy="-3.81" r=".08" inkscape:label="hotspot.dotbox"/>
-  <circle cx="22.75" cy="-3.68" r=".08" inkscape:label="hotspot.cross"/>
-  <circle cx="29.77" cy="-3.81" r=".08" inkscape:label="hotspot.all-scroll"/>
-  <circle cx="36.91" cy="-3.81" r=".08" inkscape:label="hotspot.size_all"/>
-  <circle cx="44.05" cy="-3.81" r=".08" inkscape:label="hotspot.row-resize"/>
-  <circle cx="51.2" cy="-3.81" r=".08" inkscape:label="hotspot.col-resize"/>
-  <circle cx="17.86" cy="3.33" r=".08" inkscape:label="hotspot.sb_right_arrow"/>
-  <circle cx="22.89" cy="5.71" r=".08" inkscape:label="hotspot.sb_down_arrow"/>
-  <circle cx="27.65" cy="3.33" r=".08" inkscape:label="hotspot.sb_left_arrow"/>
-  <circle cx="37.17" cy="3.33" r=".08" inkscape:label="hotspot.sb_v_double_arrow"/>
-  <circle cx="44.05" cy="3.33" r=".08" inkscape:label="hotspot.sb_h_double_arrow"/>
-  <circle cx="50.93" cy="3.07" r=".08" inkscape:label="hotspot.fd_double_arrow"/>
-  <circle cx="58.08" cy="3.07" r=".08" inkscape:label="hotspot.bd_double_arrow"/>
-  <circle cx="17.07" cy="10.47" r=".08" inkscape:label="hotspot.right_side"/>
-  <circle cx="22.62" cy="12.06" r=".08" inkscape:label="hotspot.bottom_side"/>
-  <circle cx="28.44" cy="10.47" r=".08" inkscape:label="hotspot.left_side"/>
-  <circle cx="37.97" cy="9.42" r=".08" inkscape:label="hotspot.top_right_corner"/>
-  <circle cx="45.11" cy="11.53" r=".08" inkscape:label="hotspot.bottom_right_corner"/>
-  <circle cx="49.87" cy="11.53" r=".08" inkscape:label="hotspot.bottom_left_corner"/>
-  <circle cx="57.28" cy="9.42" r=".08" inkscape:label="hotspot.top_left_corner"/>
-  <circle cx="8.47" cy="15.5" r=".08" inkscape:label="hotspot.top_tee"/>
-  <circle cx="17.33" cy="17.75" r=".08" inkscape:label="hotspot.right_tee"/>
-  <circle cx="22.75" cy="19.47" r=".08" inkscape:label="hotspot.bottom_tee"/>
-  <circle cx="27.65" cy="17.75" r=".08" inkscape:label="hotspot.left_tee"/>
-  <circle cx="39.03" cy="15.5" r=".08" inkscape:label="hotspot.ur_angle"/>
-  <circle cx="45.91" cy="19.74" r=".08" inkscape:label="hotspot.lr_angle"/>
-  <circle cx="49.08" cy="19.47" r=".08" inkscape:label="hotspot.ll_angle"/>
-  <circle cx="56.22" cy="15.5" r=".08" inkscape:label="hotspot.ul_angle"/>
-  <circle cx="56.22" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0016"/>
-  <circle cx="49.08" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0015"/>
-  <circle cx="41.94" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0014"/>
-  <circle cx="34.79" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0013"/>
-  <circle cx="27.65" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0012"/>
-  <circle cx="20.51" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0011"/>
-  <circle cx="13.36" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0010"/>
-  <circle cx="6.22" cy="29.52" r=".08" inkscape:label="hotspot.left_ptr_watch_0009"/>
-  <circle cx="56.22" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0008"/>
-  <circle cx="49.08" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0007"/>
-  <circle cx="41.94" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0006"/>
-  <circle cx="34.79" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0005"/>
-  <circle cx="27.65" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0004"/>
-  <circle cx="20.51" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0003"/>
-  <circle cx="13.36" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0002"/>
-  <circle cx="6.22" cy="22.38" r=".08" inkscape:label="hotspot.left_ptr_watch_0001"/>
+ <g fill="red" display="none" transform="translate(0 40.192)" inkscape:groupmode="layer" inkscape:label="hotspots" sodipodi:insensitive="true">
+  <circle cx="55.96" cy="-8.84" r=".08" enable-background="new" inkscape:label="hotspot.draft"/>
+  <circle cx="8.33" cy="-18.36" r=".08" inkscape:label="hotspot.not-allowed"/>
+  <circle cx="58.34" cy="-26.83" r=".08" inkscape:label="hotspot.dnd-no-drop"/>
+  <circle cx="51.2" cy="-26.83" r=".08" inkscape:label="hotspot.dnd-move"/>
+  <circle cx="44.05" cy="-26.83" r=".08" inkscape:label="hotspot.dnd-link"/>
+  <circle cx="36.91" cy="-26.83" r=".08" inkscape:label="hotspot.dnd-copy"/>
+  <circle cx="29.77" cy="-26.83" r=".08" inkscape:label="hotspot.dnd-ask"/>
+  <circle cx="22.62" cy="-25.77" r=".08" inkscape:label="hotspot.closedhand"/>
+  <circle cx="15.48" cy="-25.77" r=".08" inkscape:label="hotspot.openhand"/>
+  <circle cx="6.75" cy="-27.89" r=".08" inkscape:label="hotspot.hand"/>
+  <circle cx="63.37" cy="-35.03" r=".08" inkscape:label="hotspot.context-menu"/>
+  <circle cx="56.22" cy="-35.03" r=".08" inkscape:label="hotspot.circle"/>
+  <circle cx="49.08" cy="-35.03" r=".08" inkscape:label="hotspot.pointer-move"/>
+  <circle cx="41.94" cy="-35.03" r=".08" inkscape:label="hotspot.link"/>
+  <circle cx="34.79" cy="-35.03" r=".08" inkscape:label="hotspot.copy"/>
+  <circle cx="27.65" cy="-35.03" r=".08" inkscape:label="hotspot.help"/>
+  <circle cx="22.49" cy="-32.78" r=".08" inkscape:label="hotspot.x-cursor"/>
+  <circle cx="16.01" cy="-35.03" r=".08" inkscape:label="hotspot.right_ptr"/>
+  <circle cx="6.22" cy="-35.03" r=".08" inkscape:label="hotspot.left_ptr"/>
+  <circle cx="51.06" cy="-18.5" r=".08" inkscape:label="hotspot.cell"/>
+  <circle cx="44.19" cy="-18.5" r=".08" inkscape:label="hotspot.dot"/>
+  <circle cx="36.64" cy="-18.89" r=".08" inkscape:label="hotspot.zoom-out"/>
+  <circle cx="29.24" cy="-18.89" r=".08" inkscape:label="hotspot.zoom-in"/>
+  <circle cx="20.51" cy="-15.98" r=".08" inkscape:label="hotspot.color-picker"/>
+  <circle cx="13.36" cy="-15.98" r=".08" inkscape:label="hotspot.pencil"/>
+  <circle cx="65.75" cy="-18.63" r=".08" inkscape:label="hotspot.vertical-text"/>
+  <circle cx="57.81" cy="-18.36" r=".08" inkscape:label="hotspot.text"/>
+  <circle cx="8.33" cy="-11.22" r=".08" inkscape:label="hotspot.crosshair"/>
+  <circle cx="8.33" cy="-6.46" r=".08" inkscape:label="hotspot.sb_up_arrow"/>
+  <circle cx="8.33" cy="1.73" r=".08" inkscape:label="hotspot.top_side"/>
+  <circle cx="15.48" cy="-11.22" r=".08" inkscape:label="hotspot.dotbox"/>
+  <circle cx="22.75" cy="-11.09" r=".08" inkscape:label="hotspot.cross"/>
+  <circle cx="29.77" cy="-11.22" r=".08" inkscape:label="hotspot.all-scroll"/>
+  <circle cx="36.91" cy="-11.22" r=".08" inkscape:label="hotspot.size_all"/>
+  <circle cx="44.05" cy="-11.22" r=".08" inkscape:label="hotspot.row-resize"/>
+  <circle cx="51.2" cy="-11.22" r=".08" inkscape:label="hotspot.col-resize"/>
+  <circle cx="17.86" cy="-4.08" r=".08" inkscape:label="hotspot.sb_right_arrow"/>
+  <circle cx="22.89" cy="-1.7" r=".08" inkscape:label="hotspot.sb_down_arrow"/>
+  <circle cx="27.65" cy="-4.08" r=".08" inkscape:label="hotspot.sb_left_arrow"/>
+  <circle cx="37.17" cy="-4.08" r=".08" inkscape:label="hotspot.sb_v_double_arrow"/>
+  <circle cx="44.05" cy="-4.08" r=".08" inkscape:label="hotspot.sb_h_double_arrow"/>
+  <circle cx="50.93" cy="-4.34" r=".08" inkscape:label="hotspot.fd_double_arrow"/>
+  <circle cx="58.08" cy="-4.34" r=".08" inkscape:label="hotspot.bd_double_arrow"/>
+  <circle cx="17.07" cy="3.07" r=".08" inkscape:label="hotspot.right_side"/>
+  <circle cx="22.62" cy="4.65" r=".08" inkscape:label="hotspot.bottom_side"/>
+  <circle cx="28.44" cy="3.07" r=".08" inkscape:label="hotspot.left_side"/>
+  <circle cx="37.97" cy="2.01" r=".08" inkscape:label="hotspot.top_right_corner"/>
+  <circle cx="45.11" cy="4.12" r=".08" inkscape:label="hotspot.bottom_right_corner"/>
+  <circle cx="49.87" cy="4.12" r=".08" inkscape:label="hotspot.bottom_left_corner"/>
+  <circle cx="57.28" cy="2.01" r=".08" inkscape:label="hotspot.top_left_corner"/>
+  <circle cx="8.47" cy="8.09" r=".08" inkscape:label="hotspot.top_tee"/>
+  <circle cx="17.33" cy="10.34" r=".08" inkscape:label="hotspot.right_tee"/>
+  <circle cx="22.75" cy="12.06" r=".08" inkscape:label="hotspot.bottom_tee"/>
+  <circle cx="27.65" cy="10.34" r=".08" inkscape:label="hotspot.left_tee"/>
+  <circle cx="39.03" cy="8.09" r=".08" inkscape:label="hotspot.ur_angle"/>
+  <circle cx="45.91" cy="12.33" r=".08" inkscape:label="hotspot.lr_angle"/>
+  <circle cx="49.08" cy="12.06" r=".08" inkscape:label="hotspot.ll_angle"/>
+  <circle cx="56.22" cy="8.09" r=".08" inkscape:label="hotspot.ul_angle"/>
+  <circle cx="56.22" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0016"/>
+  <circle cx="49.08" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0015"/>
+  <circle cx="41.94" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0014"/>
+  <circle cx="34.79" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0013"/>
+  <circle cx="27.65" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0012"/>
+  <circle cx="20.51" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0011"/>
+  <circle cx="13.36" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0010"/>
+  <circle cx="6.22" cy="22.12" r=".08" inkscape:label="hotspot.left_ptr_watch_0009"/>
+  <circle cx="56.22" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0008"/>
+  <circle cx="49.08" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0007"/>
+  <circle cx="41.94" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0006"/>
+  <circle cx="34.79" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0005"/>
+  <circle cx="27.65" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0004"/>
+  <circle cx="20.51" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0003"/>
+  <circle cx="13.36" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0002"/>
+  <circle cx="6.22" cy="14.97" r=".08" inkscape:label="hotspot.left_ptr_watch_0001"/>
+  <circle cx="58.34" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0016"/>
+  <circle cx="51.2" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0015"/>
+  <circle cx="44.05" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0014"/>
+  <circle cx="36.91" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0013"/>
+  <circle cx="29.77" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0012"/>
+  <circle cx="22.62" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0011"/>
+  <circle cx="15.48" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0010"/>
+  <circle cx="8.33" cy="38.79" r=".08" enable-background="new" inkscape:label="hotspot.watch_0009"/>
+  <circle cx="58.34" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0008"/>
+  <circle cx="51.2" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0007"/>
+  <circle cx="44.05" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0006"/>
+  <circle cx="36.91" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0005"/>
+  <circle cx="29.77" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0004"/>
+  <circle cx="22.62" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0003"/>
+  <circle cx="15.48" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0002"/>
+  <circle cx="8.33" cy="31.64" r=".08" enable-background="new" inkscape:label="hotspot.watch_0001"/>
  </g>
 </svg>
