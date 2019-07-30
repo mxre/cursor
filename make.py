@@ -668,6 +668,10 @@ class SVGFilter(saxutils.XMLFilterBase):
 
 if __name__ == '__main__':
 	svgFilename = options.input_file[0]
+	
+	for size in sizes:
+		os.makedirs('{}/{}'.format(pngs_directory, size), exist_ok=True)
+	os.makedirs(hotspots_directory, exist_ok=True)
 
 	info("Parsing file {}".format(svgFilename))
 	# Try to parse the svg file
@@ -727,10 +731,6 @@ if __name__ == '__main__':
 		os.makedirs('{}'.format(output_directory))
 	else:
 		os.makedirs('{}/cursors'.format(output_directory))
-
-	for size in sizes:
-		os.makedirs('{}/{}'.format(pngs_directory, size), exist_ok=True)
-	os.makedirs(hotspots_directory, exist_ok=True)
 
 	# render pngs of of cursors
 	for size in sizes:
