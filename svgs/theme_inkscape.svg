@@ -59,7 +59,7 @@
        id="filter1398">
       <feGaussianBlur
          inkscape:collect="always"
-         stdDeviation="0.3"
+         stdDeviation="0.9"
          id="feGaussianBlur1400" />
     </filter>
   </defs>
@@ -1211,7 +1211,7 @@
            id="path4645"
            d="m 37.719502,-57.726279 2.11664,2.11664 -0.39687,-0.39687 c 0,0 0,-0.52916 0.26458,-0.79374 0.26458,-0.26458 0.79374,-0.26458 0.79374,-0.79374 0,-0.52916 -0.26458,-0.79374 -0.79374,-0.79374 -0.52916,0 -0.52916,0.52916 -0.79374,0.79374 -0.26458,0.26458 -0.79374,0.26458 -0.79374,0.26458 z" />
         <path
-           style="display:inline;opacity:0.6;fill:#000000;fill-opacity:1;stroke:#666666;stroke-opacity:1;filter:url(#filter1398)"
+           style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#666666;stroke-opacity:1;filter:url(#filter1398)"
            transform="matrix(0,-0.26458,-0.26458,0,115.60793,-38.543382)"
            sodipodi:nodetypes="cc"
            inkscape:connector-curvature="0"
@@ -1235,7 +1235,7 @@
            id="path4441-3"
            d="m 30.972632,-56.177679 c 0.519371,0.0064 0.843851,0.32247 1.05832,0.79374" />
         <path
-           style="display:inline;opacity:0.6;fill:#000000;fill-opacity:1;stroke:#666666;stroke-opacity:1;filter:url(#filter1398)"
+           style="display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:#666666;stroke-opacity:1;filter:url(#filter1398)"
            sodipodi:nodetypes="cc"
            inkscape:connector-curvature="0"
            id="path4445-6"

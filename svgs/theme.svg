@@ -9,7 +9,7 @@
    <feComposite in="SourceGraphic" in2="offset" result="composite2"/>
   </filter>
   <filter id="n" color-interpolation-filters="sRGB" inkscape:collect="always">
-   <feGaussianBlur stdDeviation=".3" inkscape:collect="always"/>
+   <feGaussianBlur stdDeviation=".9" inkscape:collect="always"/>
   </filter>
  </defs>
  <title>
@@ -180,11 +180,11 @@
    <g inkscape:label="color-picker">
     <path stroke="#fff" stroke-width=".26" d="M40.95.744c.132-.132.21-.529.21-.793l2.116-2.117.793.794L41.953.744c-.265 0-.66.078-.794.21z"/>
     <path fill="#aaa" stroke="#010101" stroke-width=".26" d="M42.614-2.825L44.731-.71l-.397-.396s0-.53.265-.794c.264-.265.793-.265.793-.794 0-.53-.264-.794-.793-.794-.53 0-.53.53-.794.794-.265.265-.794.265-.794.265z"/>
-    <path stroke="#666" d="M68.46 288.665c3-1 1.875-3.665 4.205-3.498" filter="url(#n)" opacity=".6" transform="matrix(0 -.26458 -.26458 0 120.503 16.358)"/>
+    <path stroke="#666" d="M68.46 288.665c3-1 1.875-3.665 4.205-3.498" filter="url(#n)" transform="matrix(0 -.26458 -.26458 0 120.503 16.358)"/>
    </g>
    <g inkscape:label="pencil">
     <path stroke="#fff" stroke-width=".26" d="M36.543-3.787c.62.035.862.395 1.059.793L34.824.71l-1.059.265V-.083zM33.898-.216c.519.007.844.323 1.058.794"/>
-    <path stroke="#666" d="M5 14.653l8.498-11.289" filter="url(#n)" opacity=".6" transform="translate(33.633 -3.924) scale(.26458)"/>
+    <path stroke="#666" d="M5 14.653l8.498-11.289" filter="url(#n)" transform="translate(33.633 -3.924) scale(.26458)"/>
     <path stroke="#fff" stroke-width=".26" d="M35.957-3.047c.52.006.844.322 1.058.794"/>
     <path fill-rule="evenodd" stroke="#aaa" stroke-width=".26" d="M34.03.638v-.14l.159.1z"/>
    </g>

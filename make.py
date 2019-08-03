@@ -292,7 +292,7 @@ class SVGLayerHandler(SVGHandler):
 		self._layer_hotspots = 0
 		self._translate = (0,0)
 		self._name = None
-		self._re_translate = re.compile(r'translate\((-?[0-9]+(?:\.[0-9]+)?)[, ](-?[0-9]+(?:\.[0-9]+)?)\)')
+		self._re_translate = re.compile(r'translate\((-?[0-9]+(?:\.[0-9]+)?)[, ] *(-?[0-9]+(?:\.[0-9]+)?)\)')
 		# run parser
 		self._filter_svg(self._openFile())
 		self._runParser()
@@ -695,6 +695,11 @@ class SVGFilter(saxutils.XMLFilterBase):
 if __name__ == '__main__':
 	svgFilename = options.input_file[0]
 	
+	if options.fps:
+		fps = float(options.fps)
+	if options.sizes:
+		sizes = list(map(lambda x: int(x), options.sizes.split(',')))
+
 	for size in sizes:
 		os.makedirs('{}/{}'.format(pngs_directory, size), exist_ok=True)
 	os.makedirs(hotspots_directory, exist_ok=True)
@@ -745,11 +750,6 @@ if __name__ == '__main__':
 			shutil.rmtree(output_directory)
 		except FileNotFoundError:
 			pass
-
-	if options.fps:
-		fps = float(options.fps)
-	if options.sizes:
-		sizes = list(map(lambda x: int(x), options.sizes.split(',')))
 
 	if os.path.isdir(output_directory):
 		fatalError("Theme directory exists, run with -f or --force to overwrite")
