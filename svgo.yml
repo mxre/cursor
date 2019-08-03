@@ -1,66 +1,79 @@
 # svgo --config svgo.yml --pretty --indent=1 -i svgs/theme_inkscape.svg -o svgs/theme.svg
 
-multipass: true
-
-plugins:
-  - addAttributesToSVGElement: false
-  - addClassesToSVGElement: false
-  - cleanupAttrs: true
-  - cleanupEnableBackground: true
-  - cleanupListOfValues: true
-  - cleanupNumericValues:
-      floatPrecision: 2
-  - collapseGroups: false
-  - convertColors: true
-  - convertPathData: true
-  - convertShapeToPath: false
-  - convertStyleToAttrs: true
-  - convertTransform: true
-  - mergePaths: true
-  - minifyStyles: true
-  - inlineStyles: true
-  - moveElemsAttrsToGroup: true
-  - moveGroupAttrsToElems: true
-  - removeAttrsBySelector:
-       - selector: g[inkscape:label=slices] rect
-         attributes:
-           - stroke
-           - stroke-(width|dasharray|dasharray|miterlimit|opacity)
-  - removeElementsByAttr:
-      id:
-        - base
-        - layer1
-  - removeAttrs:
-      attrs:
-        - use:stroke.*
-        - use:(width|height):100%
-        - use:inkscape.tiled-clone-of
-        - g:inkscape.tile-(cx|cy|w|h|x0|y0)
-        - path:inkscape.connector-curvature
-        - path:sodipodi.nodetypes
-  - removeComments: true
-  - removeDesc: true
-  - removeDimensions: false
-  - removeDoctype: false
-  - removeEditorsNSData: false
-  - removeElementsByAttr: true
-  - removeEmptyAttrs: true
-  - removeEmptyContainers: true
-  - removeEmptyText: true
-  - removeHiddenElems: false
-  - removeMetadata: true
-  - removeNonInheritableGroupAttrs: true
-  - removeOffCanvasPaths: true
-  - removeRasterImages: true
-  - removeStyleElement: false
-  - removeTitle: false
-  - removeUnknownsAndDefaults: true
-  - removeUnusedNS: true
-  - removeUselessDefs: true
-  - removeUselessStrokeAndFill: true
-  - removeViewBox: true
-  - removeXMLNS: false
-  - removeXMLProcInst: true
-  - reusePaths: true
-  - sortAttrs: true
-  - transformsWithOnePath: true
+{
+  "multipass": true,
+  "plugins": [
+    { "addAttributesToSVGElement": false },
+    { "addClassesToSVGElement": false },
+    { "cleanupAttrs": true },
+    { "cleanupEnableBackground": true },
+    { "cleanupListOfValues": true },
+    { "cleanupNumericValues":
+      { "floatPrecision": 2 }
+    },
+    { "collapseGroups": false },
+    { "convertColors": true },
+    { "convertPathData": true },
+    { "convertShapeToPath": false },
+    { "convertStyleToAttrs": true },
+    { "convertTransform": true },
+    { "mergePaths": true },
+    { "minifyStyles": true },
+    { "inlineStyles": true },
+    { "moveElemsAttrsToGroup": true },
+    { "moveGroupAttrsToElems": true },
+    { "removeAttrsBySelector": [
+        { "selector": "g[inkscape:label=slices] rect",
+          "attributes": [
+            "stroke",
+            "stroke-(width|dasharray|dasharray|miterlimit|opacity)"
+          ]
+        }
+      ]
+    }, 
+    { "removeElementsByAttr":
+      { "id": [
+          "base",
+          "layer1"
+        ]
+      }
+    },
+    { "removeAttrs":
+      { "attrs": [
+          "use:stroke.*",
+          "use:(width|height):100%",
+          "use:inkscape.tiled-clone-of",
+          "g:inkscape.tile-(cx|cy|w|h|x0|y0)",
+          "path:inkscape.connector-curvature",
+          "path:sodipodi.nodetypes"
+        ]
+      }
+    },
+    { "removeComments": true },
+    { "removeDesc": true },
+    { "removeDimensions": false },
+    { "removeDoctype": false },
+    { "removeEditorsNSData": false },
+    { "removeElementsByAttr": true },
+    { "removeEmptyAttrs": true },
+    { "removeEmptyContainers": true },
+    { "removeEmptyText": true },
+    { "removeHiddenElems": false },
+    { "removeMetadata": true },
+    { "removeNonInheritableGroupAttrs": true },
+    { "removeOffCanvasPaths": true },
+    { "removeRasterImages": true },
+    { "removeStyleElement": false },
+    { "removeTitle": false },
+    { "removeUnknownsAndDefaults": true },
+    { "removeUnusedNS": true },
+    { "removeUselessDefs": true },
+    { "removeUselessStrokeAndFill": true },
+    { "removeViewBox": true },
+    { "removeXMLNS": false },
+    { "removeXMLProcInst": true },
+    { "reusePaths": true },
+    { "sortAttrs": true },
+    { "transformsWithOnePath": true }
+  ]
+}
