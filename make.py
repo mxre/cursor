@@ -157,6 +157,7 @@ class SVGHandler(handler.ContentHandler):
 	def __init__(self):
 		self.width = 0
 		self.height = 0
+		self.scale = None
 		self.title = None
 		self._content = None
 
@@ -199,8 +200,21 @@ class SVGHandler(handler.ContentHandler):
 		except (ValueError, TypeError):
 			return False
 
-	def parseCoordinates(self, val):
-		"""Strips the units from a coordinate, and returns just the value in pixles"""
+	def _parseViewBox(self, stringVal):
+		viewBox = tuple(map(lambda x: float(x), stringVal.split(' ')))
+		scale = (
+			self.width / (viewBox[2] - viewBox[0]),
+			self.height / (viewBox[3] - viewBox[1])
+		)
+		if round(scale[0], 3) != round(scale[1], 3):
+			fatalError("ViewBox is not square: {0[0]} != {0[1]}".format(scale))
+		return scale
+
+	def parseCoordinates(self, val, viewBox=True):
+		"""
+		Strips the units from a coordinate, and returns just the value in pixles.
+		Calculates pixel value in viewbox
+		"""
 
 		if val.endswith('px'):
 			val = float(val.rstrip('px'))
@@ -215,9 +229,12 @@ class SVGHandler(handler.ContentHandler):
 		elif val.endswith('%'):
 			fatalError("Only px are supported as a unit")
 		elif self._isFloat(val):
+			# assume pixels
 			val = float(val)
 		else:
-			fatalError("Coordinate value {} has unrecognised units. Only px supported.".format(val))
+			fatalError("Coordinate value {} has unrecognised units.".format(val))
+		if viewBox and self.scale is not None:
+			val = self.scale[0] * val
 		return val
 
 	def characters(self, c):
@@ -232,8 +249,10 @@ class SVGHandler(handler.ContentHandler):
 		dbg('startElement_svg called')
 		width = attrs.get('width', None)
 		height = attrs.get('height', None)
-		self.width = self.parseCoordinates(width)
-		self.height = self.parseCoordinates(height)
+		viewBox = attrs.get('viewBox', None)
+		self.width = self.parseCoordinates(width, viewBox=False)
+		self.height = self.parseCoordinates(height, viewBox=False)
+		self.scale = self._parseViewBox(viewBox)
 
 	def startElement_title(self, name, attrs):
 		"""Callback hook to get document title"""
@@ -364,7 +383,10 @@ class SVGLayerHandler(SVGHandler):
 				self.slices_hidden = self._isHidden(attrs)
 				try:
 					m = self._re_translate.match(attrs['transform'])
-					self._translate = (float(m.group(1)), float(m.group(2)))
+					self._translate = (
+						self.parseCoordinates(m.group(1)),
+						self.parseCoordinates(m.group(2))
+					)
 					dbg(self._translate)
 				except (AttributeError, KeyError) as e:
 					self._translate = (0,0)
@@ -373,7 +395,10 @@ class SVGLayerHandler(SVGHandler):
 				self.hotspots_hidden = self._isHidden(attrs)
 				try:
 					m = self._re_translate.match(attrs['transform'])
-					self._translate = (float(m.group(1)), float(m.group(2)))
+					self._translate = (
+						self.parseCoordinates(m.group(1)),
+						self.parseCoordinates(m.group(2))
+					)
 					dbg(self._translate)
 				except (AttributeError, KeyError) as e:
 					self._translate = (0,0)
@@ -391,10 +416,10 @@ class SVGLayerHandler(SVGHandler):
 			self._layer_nests -= 1
 			for i in self.svg_rects.values():
 				i.slice = (
-					(i.slice[0] + self._translate[0]) * 3.7795,
-					(i.slice[1] + self._translate[1]) * 3.7795,
-					i.slice[2] * 3.7795,
-					i.slice[3] * 3.7795)
+					(i.slice[0] + self._translate[0]),
+					(i.slice[1] + self._translate[1]),
+					i.slice[2],
+					i.slice[3])
 				if self.size is None:
 					self.size = round(i.slice[2])
 				dbg("{0} ({1[0]}, {1[1]}, {1[2]}, {1[3]}) ({2[0]}, {1[1]})".format(i.name, i.slice, self._translate))
@@ -403,8 +428,8 @@ class SVGLayerHandler(SVGHandler):
 			for i in self.svg_rects.values():
 				dbg("hotspot {0} ({1[0]}, {1[1]})".format(i.name, i.hotspot))
 				i.hotspot = (
-					(i.hotspot[0] + self._translate[0] - 0.1) * 3.7795 - i.slice[0] ,
-					(i.hotspot[1] + self._translate[1] - 0.1) * 3.7795 - i.slice[1])
+					(i.hotspot[0] + self._translate[0] - 0.1) - i.slice[0] ,
+					(i.hotspot[1] + self._translate[1] - 0.1) - i.slice[1])
 				dbg("hotspot {0} ({1[0]}, {1[1]}) ({2[0]}, {2[1]})".format(i.name, i.hotspot, self._translate ))
 
 	def _startElement_rect(self, name, attrs):
@@ -423,10 +448,11 @@ class SVGLayerHandler(SVGHandler):
 				name = attrs['id']
 			rect = SVGRect(name)
 			rect.slice = (
-				float(attrs['x']),
-				float(attrs['y']),
-				float(attrs['width']),
-				float(attrs['height']))
+				self.parseCoordinates(attrs['x']),
+				self.parseCoordinates(attrs['y']),
+				self.parseCoordinates(attrs['width']),
+				self.parseCoordinates(attrs['height'])
+			)
 			self._add(rect)
 
 	def _startElement_circle(self, name, attrs):
@@ -447,8 +473,8 @@ class SVGLayerHandler(SVGHandler):
 				try:
 					rect = self.svg_rects[name[8:]]
 					rect.hotspot = (
-						float(attrs['cx']),
-						float(attrs['cy']))
+						self.parseCoordinates(attrs['cx']),
+						self.parseCoordinates(attrs['cy']))
 				except KeyError:
 					warn("Hotspot '{}' has not corresponding slice".format(name))
 					pass
