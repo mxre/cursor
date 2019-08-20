@@ -5,7 +5,7 @@ This collection of files enables you to create a Linux cursor theme out of an SV
 
 ![All cursors of my theme](preview.png)
 
-For a prebuilt theme, see the releases:
+[For a prebuilt theme, see the releases](https://github.com/mxre/cursor/releases).
 
 ## Build the Cursor theme
 
