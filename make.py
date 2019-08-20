@@ -2,10 +2,35 @@
 #
 # make cursor theme
 #
-# Released under the GNU General Public License, version 2.
+# Copyright (C) 2019 Max Resch <resch.max@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+# Original Copynotice:
 # Email Lee Braiden of Digital Unleashed at lee.b@digitalunleashed.com
 # with any questions, suggestions, patches, or general uncertainties
 # regarding this software.
+##############################################################################
+#
+# This program was heavily modified from the authors original version
+# to increase performance. It now uses rsvg-convert (faster than inkscape), and
+# only once for each size (cursors are croped using Pillow), this makes it a lot faster.
+#
+# Shadows in my template theme are made usign a Guassian filter and can be enabled by adding
+# a filter (inkscape:label=Drop Shadow")
+#
 
 usageMsg = """You need to add a layer called "slices", and draw rectangles on it to represent the areas that should be saved as slices.  It helps when drawing these rectangles if you make them translucent.
 

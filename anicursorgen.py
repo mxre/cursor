@@ -16,6 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# Copyright (C) 2019 Max Resch <resch.max@gmail.com>
+# * Changed time values in input files to coincide with xcursorgen
+#   (this allows for reuse of the same files for anicursorgen and xcursorgen)
 
 import sys
 import os
