@@ -82,7 +82,7 @@ xcursorgen_path = 'xcursorgen'
 # executable for ffmpeg (used to generated animated previews in -t mode)
 ffmpeg_path = 'ffmpeg'
 # animated preview format (for ffmpeg) and file suffix
-animated_preview_format = { 'ffmpeg_format': 'apng', 'suffix': 'apng'}
+animated_preview_format = { 'ffmpeg_format': 'webp', 'suffix': 'webp'}
 
 from xml.sax import saxutils, make_parser, SAXParseException, handler, xmlreader
 from xml.sax.xmlreader import InputSource
@@ -583,7 +583,7 @@ if options.anicur:
 			if not entry.name.endswith('.in') or not entry.is_file():
 				continue
 			name = os.path.splitext(entry.name)[0]
-			if is_animated_cursor(hotspots_directory, name):
+			if is_animated_cursor(entry.path):
 				suffix = 'ani'
 			else:
 				suffix = 'cur'
@@ -592,9 +592,9 @@ if options.anicur:
 			make_cursor_from(input_config, output_file, args)
 			input_config.close()
 
-def is_animated_cursor(hotspots_directory, name):
+def is_animated_cursor(path):
 	""" Check if configuration file belongs to an animated cursor """
-	with open('{}/{}.in'.format(hotspots_directory, name), 'r') as f:
+	with open(path, 'r') as f:
 		for l in f.readlines():
 			line = l.split()
 			try:
@@ -609,9 +609,10 @@ def make_animated_cursor_apng(pngs_directory, size, name):
 	try:
 		p = subprocess.run([
 			ffmpeg_path,
-			'-i', '{src_dir}/{size}/{name}_%04d.png'.format(src_dir=pngs_directory, size=size, name=name),
-			'-plays', '0', # loop indefinetly
 			'-r', '{:.2f}'.format(fps),
+			'-i', '{src_dir}/{size}/{name}_%04d.png'.format(src_dir=pngs_directory, size=size, name=name),
+			'-loop', '0', # loop indefinetly
+            '-lossless', '1',
 			'-f', animated_preview_format['ffmpeg_format'],
 			'-y', # always overwrite output file
 			'{dest_dir}/{name}_{size}.{ext}'.format(
